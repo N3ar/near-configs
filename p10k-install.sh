@@ -5,5 +5,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # TODO Make this automatic
 echo "CHANGE ZSH THEME TO powerlevel10k/powerlevel10k IN THE CONFIG."
 vim ~/.zshrc
+source ~/.zshrc
 
 p10k configure

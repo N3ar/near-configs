@@ -1,4 +1,6 @@
 #!/bin/bash
+USER=$(whoami)
+HOME=/home/${USER}
 FONTS=/usr/share/fonts
 
 # Download Fonts

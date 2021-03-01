@@ -1,6 +1,6 @@
 # Configs
 
-A shortcuts to setting up new environments. I got tired of doing it bit by bit and forgetting pieces. More tools will be added as they become things I install standard.
+A shortcuts to setting up new environments. I got tired of doing it bit by bit and forgetting pieces. More tools will be added as they become things I install or think I may install on more than one machine.
 
 ## Shell Update
 
@@ -14,6 +14,7 @@ Run the scripts in the following order:
 
 ## General Tools
 
+- net-tools-install.sh
 - vscode-install.sh
 - tmux-install.sh
 
@@ -33,14 +34,15 @@ Run the scripts in the following order:
 
 ### C / C++
 
-- gcc-install.sh
-- make-install.sh
+- build-install.sh
 - boost-install.sh
 - clang-install.sh (important for C dev in SpaceVim)
 
 ## Defensive Tools
 
 TODO : Whatever this takes
+Largely going to be whatever goes well in user space as an analyst box that
+isn't duplicated by the user interface available on SecurityOnion.
 
 ## TODOs
 
@@ -50,20 +52,13 @@ Adjustments I should make to further automate this when I have time:
 
 Error handle for each command
 
-### Fonts Install
-
-- programatically find the directory to install fonts into
-- save fonts into downloads folder, if it doesn't exist, create it
-
 ### ZSH Install
 
 - switch to zsh before source
 - move powerline stuff to fonts
-- automate exit from drop in shell to continue script
 
 ### p10k Install
 
-- automate config file update
 - automate p10k config entries
 
 ### VSCode Install
@@ -73,8 +68,6 @@ Error handle for each command
 ### angr Install
 
 - Programatically get the shell used and associated config file
-
-### Make Install
 
 ### GDB Install
 

@@ -20,11 +20,19 @@ Run the scripts in the following order:
 
 ## RE Tools
 
-### Scriptable Analyzers
+### Scriptable Static Analyzers
+
+- binaryninja-install.sh
+
+### Dynamic Analysis
 
 - angr-install.sh
-- binaryninja-install.sh
 - gdb-install.sh
+
+### Virtualization
+
+- vbox-install.sh
+- qemu-install.sh
 
 ## DEV Tools
 

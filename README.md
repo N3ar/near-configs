@@ -20,6 +20,8 @@ Run the scripts in the following order:
 
 ## RE Tools
 
+Note: Some tools may be installed as part of others. If you are used to useing them on their own and go to install them separately, and they are already installed... it's fine.
+
 ### Scriptable Static Analyzers
 
 - binaryninja-install.sh
@@ -28,11 +30,19 @@ Run the scripts in the following order:
 
 - angr-install.sh
 - gdb-install.sh
+- gef-install.sh
+- capstone-install.sh
+- keystone-install.sh
 
 ### Virtualization
 
 - vbox-install.sh
 - qemu-install.sh
+- unicorn-install.sh
+
+### Exploit enablement
+
+- ropper-install.sh
 
 ## DEV Tools
 

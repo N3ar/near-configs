@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Requires python development to be installed\n"
+pip3 install gdown
+
 BINJA_ID=1GF4pQBLJsKd4xNXe_FhLE231hxGgKIqQ
 BINJA_LOC=/opt/binaryninja
 

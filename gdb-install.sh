@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo apt install gdb
+sudo apt install -y gdb

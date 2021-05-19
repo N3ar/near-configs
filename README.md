@@ -46,11 +46,31 @@ Run the scripts in the following order:
 - boost-install.sh
 - clang-install.sh (important for C dev in SpaceVim)
 
+### Java
+
+- jre-install.sh (important for OpenRefine in DataScience)
+
 ## Defensive Tools
 
 TODO : Whatever this takes
 Largely going to be whatever goes well in user space as an analyst box that
 isn't duplicated by the user interface available on SecurityOnion.
+
+## Data Science
+
+- anaconda-install.sh
+- openrefine-install.sh
+
+## Additonal Tools
+
+These tools are optional. Some are needed by specific tools above and some are 
+just preference. I don't usually add these tools to a distribution unless the 
+annotated use case is satisfied.
+
+- jre-install.sh (Important for OpenRefine in DataScience)
+- chrome-install.sh (Important for OpenRefine in DataScience)
+- spotify-install.sh (Baremetal install music)
+
 
 ## TODOs
 
@@ -76,6 +96,11 @@ Error handle for each command
 ### angr Install
 
 - Programatically get the shell used and associated config file
+
+### Anaconda Install
+
+- Programatically add the anaconda initialization code to the user's default
+shell
 
 ### GDB Install
 

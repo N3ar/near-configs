@@ -41,4 +41,9 @@ pushd ${TGT_DIR}
 sudo tar zxvf $(ls ${INST}/jre*)
 popd
 
+JHOME=$(find ${TGT_DIR} -type d -name "jre*")
+echo "\n# Java environment variables and PATH configurations" >> ~/.zshrc
+echo "export JAVA_HOME=${JHOME}" >> ~/.zshrc
+echo "export PATH=${PATH}:${JAVA_HOME}/bin" >> ~/.zshrc
+
 rm ${INST}/jre*

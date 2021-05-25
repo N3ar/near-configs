@@ -70,6 +70,7 @@ isn't duplicated by the user interface available on SecurityOnion.
 
 - anaconda-install.sh
 - openrefine-install.sh
+- matplotlib-install.sh (can be installed in or outside of conda env)
 
 ## Additonal Tools
 

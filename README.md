@@ -55,6 +55,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 - build-install.sh
 - boost-install.sh
 - clang-install.sh (important for C dev in SpaceVim)
+- valgrind-install.sh
 
 ### Java
 

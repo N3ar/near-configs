@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo apt install -y valgrind
+sudo apt install valgrind -y

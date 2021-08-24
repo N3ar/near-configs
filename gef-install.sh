@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir gef-gdb
-git submodule add https://github.com/hugsy/gef.git gef-gdb/gef
+git submodule add -f https://github.com/hugsy/gef.git gef-gdb/gef
 git submodule update --init --recursive
 PWD=$(pwd)
 touch ~/.gdbinit

@@ -34,6 +34,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 - gef-install.sh
 - capstone-install.sh
 - keystone-install.sh
+- frida-install.sh
 
 ### Virtualization
 

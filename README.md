@@ -25,6 +25,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ### Scriptable Static Analyzers
 
 - binaryninja-install.sh
+- jeb-install.sh
 
 ### Dynamic Analysis
 
@@ -33,6 +34,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 - gef-install.sh
 - capstone-install.sh
 - keystone-install.sh
+- frida-install.sh
 
 ### Virtualization
 
@@ -60,6 +62,11 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ### Java
 
 - jre-install.sh (important for OpenRefine in DataScience)
+
+### Android
+
+- android-studio-install.sh
+- android-ndk-install.sh
 
 ## Defensive Tools
 
@@ -114,6 +121,3 @@ Error handle for each command
 - Programatically add the anaconda initialization code to the user's default
 shell
 
-### GDB Install
-
-### qemu Install

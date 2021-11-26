@@ -45,6 +45,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 ### Exploit enablement
 
+- pwntools-install.sh
 - ropper-install.sh
 
 ## DEV Tools

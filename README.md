@@ -26,6 +26,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 - binaryninja-install.sh
 - jeb-install.sh
+- ghidra-install.sh
 
 ### Dynamic Analysis
 

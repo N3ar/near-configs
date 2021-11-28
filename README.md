@@ -69,6 +69,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 - android-studio-install.sh
 - android-ndk-install.sh
+- rootAVD-install.sh
 
 ## Defensive Tools
 

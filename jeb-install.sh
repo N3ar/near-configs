@@ -28,4 +28,5 @@ sudo ln -s ${TGT}/jeb_linux.sh ${HOME}/.local/bin/jeb_ce
 rm ${ZIP}
 popd # DWN
 
+echo "path+=('${HOME}/.local/bin')" >> $HOME/.zshrc
 echo "jeb-ce install complete! Close your terminal and run 'jeb-ce'."

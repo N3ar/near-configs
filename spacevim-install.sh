@@ -1,7 +1,14 @@
 #!/bin/bash
+HOME=/home/$(whoami)
 sudo apt install -y vim
 
 curl -sLf https://spacevim.org/install.sh | bash
 
-# TODO include the correct colorscheme
-cp spacevim-configs/init.toml /home/$(whoami)/.SpaceVim.d/init.toml
+pushd ${HOME}
+ls -al | grep ".SpaceVim.d"
+if [ $? -ne 0 ]; then
+  mkdir .SpaceVim.d
+fi
+popd
+
+cp spacevim-configs/init.toml ${HOME}/.SpaceVim.d/init.toml

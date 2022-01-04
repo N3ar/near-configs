@@ -9,14 +9,14 @@ Run the scripts in the following order:
 - first.sh
 - spacevim-install.sh
 - font-install.sh
-- zsh-install.sh 
+- zsh-install.sh (logout and then back in)
 - p10k-install.sh 
 
 ## General Tools
 
 - net-tools-install.sh
-- vscode-install.sh
 - tmux-install.sh
+- vscode-install.sh
 
 ## RE Tools
 
@@ -25,8 +25,8 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ### Scriptable Static Analyzers
 
 - binaryninja-install.sh
-- jeb-install.sh
 - ghidra-install.sh
+- jeb-install.sh
 
 ### Dynamic Analysis
 
@@ -73,7 +73,9 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ## Defensive Tools
 
 TODO : Whatever this takes
-Largely going to be whatever goes well in user space as an analyst box that
+- cuckoo-install.md (Super fucked up, not scriptable)
+
+    Largely going to be whatever goes well in user space as an analyst box that
 isn't duplicated by the user interface available on SecurityOnion.
 
 ## Data Science
@@ -91,20 +93,23 @@ annotated use case is satisfied.
 - jre-install.sh (Important for OpenRefine in DataScience)
 - chrome-install.sh (Important for OpenRefine in DataScience)
 - spotify-install.sh (Baremetal install music)
-
+- rchat-install.sh
+- zoom-install.sh
+- pia-vpn-install.sh
 
 ## TODOs
 
-Adjustments I should make to further automate this when I have time:
+Adjustments I should make to further automate this when I have time
 
 ### General
 
-Error handle for each command
+- Error handle for each command
+- Provide exit statuses
+- Use exit statuses to nest some commands
 
 ### ZSH Install
 
-- switch to zsh before source
-- move powerline stuff to fonts
+- Handle logoff and logon after installation
 
 ### p10k Install
 
@@ -123,3 +128,6 @@ Error handle for each command
 - Programatically add the anaconda initialization code to the user's default
 shell
 
+### PIA Install
+
+- Fetch installer from redirecting page

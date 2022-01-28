@@ -96,6 +96,7 @@ annotated use case is satisfied.
 - rchat-install.sh
 - zoom-install.sh
 - pia-vpn-install.sh
+- stream-support-install.sh
 
 ## TODOs
 

@@ -70,6 +70,41 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 - android-studio-install.sh
 - android-ndk-install.sh
 
+## Red Teaming Tools
+
+- cyberchef-install.sh (Collection https://github.com/gchq/CyberChef)
+
+### Recon Tools
+
+- interactsh-install.sh (https://github.com/projectdiscovery/interactsh)
+  - Honestly, I don't really know what it does so here it stays.
+
+#### Port Scanning
+
+- nmap-install.sh
+- naabu-install.sh (https://github.com/projectdiscovery/naabu)
+
+#### Domain Enumeration
+
+- lepus-install.sh (https://github.com/gfek/Lepus)
+- subfinder-install.sh (https://github.com/projectdiscovery/subfinder)
+- httpx-install.sh (https://github.com/projectdiscovery/httpx)
+
+### Vuln Scanning Tools
+
+- nuclei-install.sh (https://github.com/projectdiscovery/nuclei)
+- nuclei-template-install.sh (https://github.com/projectdiscovery/nuclei-templates)
+
+#### Web Vuln Scanning Tools
+
+- zaproxy-install.sh (https://www.zaproxy.org/download/)
+
+### Crypanalysis
+
+- rsactftool-install.sh (https://github.com/Ganapati/RsaCtfTool)
+
+### Web Analysis
+
 ## Defensive Tools
 
 TODO : Whatever this takes
@@ -77,6 +112,47 @@ TODO : Whatever this takes
 
     Largely going to be whatever goes well in user space as an analyst box that
 isn't duplicated by the user interface available on SecurityOnion.
+
+## OSINT Tools
+
+Some of these tools may be installed other places. That's fine, we can clean
+it up later.
+
+### Prerequisites
+
+Python tooling should be installed before installing these tools.
+
+### Video Tools
+
+- vlc-install.sh
+- ffmpeg-install.sh
+
+#### Youtube Tools
+
+- youtubedl-install.sh (download yt vods)
+- ytdlp-install.sh (???)
+
+#### Stream Tools
+
+- streamlink-install.sh (pipes video streams from services)
+
+### Social Tools
+
+- sherlock-install.sh
+- instalooter-install.sh
+- instaloader-install.sh
+
+### Image Tools
+
+- gallerydl-install.sh
+
+### Document Tools
+
+- xeuledoc-install.sh (Info on public Google Docs)
+
+### Phone Tools
+
+- phoneinfoga-install.py (https://github.com/sundowndev/PhoneInfoga)
 
 ## Data Science
 
@@ -101,6 +177,18 @@ annotated use case is satisfied.
 ## TODOs
 
 Adjustments I should make to further automate this when I have time
+
+### GITHUB FIXES
+
+- Update all github installs to work on FORKs
+- Write Fork Updater
+  - Read List of Repos
+  - Confirm .git presence
+  - Provide diff to user to assess updates (accept all option)
+
+### GITHUB UPDATES
+
+- Write script to cull /usr/local for .git repos and update all found
 
 ### General
 
@@ -132,3 +220,8 @@ shell
 ### PIA Install
 
 - Fetch installer from redirecting page
+
+### Windows tools?
+- Could always put something together w/ windows tools and VMs
+- https://github.com/mentebinaria/retoolkit
+

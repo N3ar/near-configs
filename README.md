@@ -97,6 +97,7 @@ annotated use case is satisfied.
 - zoom-install.sh
 - pia-vpn-install.sh
 - stream-support-install.sh
+- libreoffice-install.sh
 
 ## TODOs
 

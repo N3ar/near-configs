@@ -50,9 +50,12 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 ## DEV Tools
 
+- docker-install.sh (doesn't fit with RE really)
+
 ### Python
 
 - python-dev-install.sh (includes pycharm-community, ipython3)
+- virtualenv-install.sh (Surely other things use it, I just don't know)
 
 ### C / C++
 
@@ -77,6 +80,12 @@ TODO : Whatever this takes
 Largely going to be whatever goes well in user space as an analyst box that
 isn't duplicated by the user interface available on SecurityOnion.
 
+## DevOps Tools
+
+Not something I know much about... required for a project.
+
+- vault-install.sh
+
 ## Data Science
 
 - anaconda-install.sh
@@ -92,7 +101,6 @@ annotated use case is satisfied.
 - jre-install.sh (Important for OpenRefine in DataScience)
 - chrome-install.sh (Important for OpenRefine in DataScience)
 - spotify-install.sh (Baremetal install music)
-
 
 ## TODOs
 

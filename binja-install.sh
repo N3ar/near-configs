@@ -11,7 +11,7 @@ BINJA_LOC=/opt/binaryninja
 
 # NOTE Only works on open access files.
 pushd ~/Downloads
-gdown ${BINJA_ID}
+gdown --id ${BINJA_ID}
 
 # Unpack Binja to opt 
 sudo mkdir ${BINJA_LOC}

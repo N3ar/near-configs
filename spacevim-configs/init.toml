@@ -39,6 +39,7 @@ default_position = 'bottom'
 default_height = 30
 
 # For this layer to work correctly, clang must be installed on the machine
+# https://spacevim.org/layers/lang/python/
 [[layers]]
 name = "lang#c"
 clang_executable = "/usr/bin/clang"
@@ -48,7 +49,13 @@ clang_executable = "/usr/bin/clang"
         objc = "c11"
         objcpp = "c++1z"
 
-# Enable Python Layer... Should probably make this an echo in from the 
-# python install script _IF_ spacevim exists
-#
-# https://spacevim.org/layers/lang/python/
+# Enable Python Layer
+name = "lang#python"
+format_on_save = true
+enabled_linters = ['python', 'pylint']
+python_file_head = [
+    '#!/usr/bin/env python',
+    '# -*- coding: utf-8 -*-',
+    '',
+    ''
+]

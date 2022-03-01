@@ -51,6 +51,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ## DEV Tools
 
 - docker-install.sh (doesn't fit with RE really)
+- jq-install.sh
 
 ### Python
 
@@ -84,6 +85,7 @@ isn't duplicated by the user interface available on SecurityOnion.
 
 Not something I know much about... required for a project.
 
+- hashicorp-ppa-install.sh
 - vault-install.sh
 
 ## Data Science

@@ -24,7 +24,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 ### Scriptable Static Analyzers
 
-- binaryninja-install.sh
+- binaryninja-install.sh (FIX TO RUN INSTALLER)
 - ghidra-install.sh
 - jeb-install.sh
 
@@ -50,9 +50,13 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 ## DEV Tools
 
+- docker-install.sh (doesn't fit with RE really)
+- jq-install.sh
+
 ### Python
 
 - python-dev-install.sh (includes pycharm-community, ipython3)
+- virtualenv-install.sh (Surely other things use it, I just don't know)
 
 ### C / C++
 
@@ -69,6 +73,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 - android-studio-install.sh
 - android-ndk-install.sh
+- rootAVD-install.sh
 
 ## Red Teaming Tools
 
@@ -154,6 +159,13 @@ Python tooling should be installed before installing these tools.
 
 - phoneinfoga-install.py (https://github.com/sundowndev/PhoneInfoga)
 
+## DevOps Tools
+
+Not something I know much about... required for a project.
+
+- hashicorp-ppa-install.sh
+- vault-install.sh
+
 ## Data Science
 
 - anaconda-install.sh
@@ -195,6 +207,10 @@ Adjustments I should make to further automate this when I have time
 - Error handle for each command
 - Provide exit statuses
 - Use exit statuses to nest some commands
+
+### Binja Install
+
+- Run included install script that I wasn't using before
 
 ### ZSH Install
 

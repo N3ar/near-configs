@@ -40,8 +40,13 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ### Virtualization
 
 - vbox-install.sh
-- qemu-install.sh
+- qemu-install.sh (TODO)
 - unicorn-install.sh
+
+### Fuzzing
+
+- syzkaller-install.sh & update
+- kAFL-install.sh & update
 
 ### Exploit enablement
 
@@ -207,6 +212,10 @@ Adjustments I should make to further automate this when I have time
 - Error handle for each command
 - Provide exit statuses
 - Use exit statuses to nest some commands
+
+### QEMU Install
+
+- Alter to install into /usr/local
 
 ### Binja Install
 

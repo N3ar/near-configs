@@ -190,6 +190,7 @@ annotated use case is satisfied.
 - zoom-install.sh
 - pia-vpn-install.sh
 - stream-support-install.sh
+- ntpdate-install.sh (Fixes NTP issues on WSL/Deb easily)
 
 ## TODOs
 

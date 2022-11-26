@@ -17,6 +17,7 @@ Run the scripts in the following order:
 - net-tools-install.sh
 - tmux-install.sh
 - vscode-install.sh
+- keepass-install.sh
 
 ## RE Tools
 
@@ -78,6 +79,8 @@ TODO : Whatever this takes
     Largely going to be whatever goes well in user space as an analyst box that
 isn't duplicated by the user interface available on SecurityOnion.
 
+- clamav-install.sh
+
 ## Data Science
 
 - anaconda-install.sh
@@ -96,6 +99,7 @@ annotated use case is satisfied.
 - rchat-install.sh
 - zoom-install.sh
 - pia-vpn-install.sh
+- nord-vpn-install.sh
 - stream-support-install.sh
 - libreoffice-install.sh
 

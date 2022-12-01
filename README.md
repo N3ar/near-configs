@@ -25,7 +25,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 ### Scriptable Static Analyzers
 
-- binaryninja-install.sh
+- binaryninja-install.sh (FIX TO RUN INSTALLER)
 - ghidra-install.sh
 - jeb-install.sh
 
@@ -41,8 +41,13 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 ### Virtualization
 
 - vbox-install.sh
-- qemu-install.sh
+- qemu-install.sh (TODO)
 - unicorn-install.sh
+
+### Fuzzing
+
+- syzkaller-install.sh & update
+- kAFL-install.sh & update
 
 ### Exploit enablement
 
@@ -51,9 +56,13 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 ## DEV Tools
 
+- docker-install.sh (doesn't fit with RE really)
+- jq-install.sh
+
 ### Python
 
 - python-dev-install.sh (includes pycharm-community, ipython3)
+- virtualenv-install.sh (Surely other things use it, I just don't know)
 
 ### C / C++
 
@@ -70,6 +79,42 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 - android-studio-install.sh
 - android-ndk-install.sh
+- rootAVD-install.sh
+
+## Red Teaming Tools
+
+- cyberchef-install.sh (Collection https://github.com/gchq/CyberChef)
+
+### Recon Tools
+
+- interactsh-install.sh (https://github.com/projectdiscovery/interactsh)
+  - Honestly, I don't really know what it does so here it stays.
+
+#### Port Scanning
+
+- nmap-install.sh
+- naabu-install.sh (https://github.com/projectdiscovery/naabu)
+
+#### Domain Enumeration
+
+- lepus-install.sh (https://github.com/gfek/Lepus)
+- subfinder-install.sh (https://github.com/projectdiscovery/subfinder)
+- httpx-install.sh (https://github.com/projectdiscovery/httpx)
+
+### Vuln Scanning Tools
+
+- nuclei-install.sh (https://github.com/projectdiscovery/nuclei)
+- nuclei-template-install.sh (https://github.com/projectdiscovery/nuclei-templates)
+
+#### Web Vuln Scanning Tools
+
+- zaproxy-install.sh (https://www.zaproxy.org/download/)
+
+### Crypanalysis
+
+- rsactftool-install.sh (https://github.com/Ganapati/RsaCtfTool)
+
+### Web Analysis
 
 ## Defensive Tools
 
@@ -80,6 +125,54 @@ TODO : Whatever this takes
 isn't duplicated by the user interface available on SecurityOnion.
 
 - clamav-install.sh
+
+## OSINT Tools
+
+Some of these tools may be installed other places. That's fine, we can clean
+it up later.
+
+### Prerequisites
+
+Python tooling should be installed before installing these tools.
+
+### Video Tools
+
+- vlc-install.sh
+- ffmpeg-install.sh
+
+#### Youtube Tools
+
+- youtubedl-install.sh (download yt vods)
+- ytdlp-install.sh (???)
+
+#### Stream Tools
+
+- streamlink-install.sh (pipes video streams from services)
+
+### Social Tools
+
+- sherlock-install.sh
+- instalooter-install.sh
+- instaloader-install.sh
+
+### Image Tools
+
+- gallerydl-install.sh
+
+### Document Tools
+
+- xeuledoc-install.sh (Info on public Google Docs)
+
+### Phone Tools
+
+- phoneinfoga-install.py (https://github.com/sundowndev/PhoneInfoga)
+
+## DevOps Tools
+
+Not something I know much about... required for a project.
+
+- hashicorp-ppa-install.sh
+- vault-install.sh
 
 ## Data Science
 
@@ -101,17 +194,41 @@ annotated use case is satisfied.
 - pia-vpn-install.sh
 - nord-vpn-install.sh
 - stream-support-install.sh
+<<<<<<< HEAD
 - libreoffice-install.sh
+=======
+- ntpdate-install.sh (Fixes NTP issues on WSL/Deb easily)
+>>>>>>> 54398e97a8b127a069b0fbc7d979784f9310bf60
 
 ## TODOs
 
 Adjustments I should make to further automate this when I have time
+
+### GITHUB FIXES
+
+- Update all github installs to work on FORKs
+- Write Fork Updater
+  - Read List of Repos
+  - Confirm .git presence
+  - Provide diff to user to assess updates (accept all option)
+
+### GITHUB UPDATES
+
+- Write script to cull /usr/local for .git repos and update all found
 
 ### General
 
 - Error handle for each command
 - Provide exit statuses
 - Use exit statuses to nest some commands
+
+### QEMU Install
+
+- Alter to install into /usr/local
+
+### Binja Install
+
+- Run included install script that I wasn't using before
 
 ### ZSH Install
 
@@ -137,3 +254,8 @@ shell
 ### PIA Install
 
 - Fetch installer from redirecting page
+
+### Windows tools?
+- Could always put something together w/ windows tools and VMs
+- https://github.com/mentebinaria/retoolkit
+

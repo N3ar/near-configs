@@ -51,5 +51,8 @@ sudo ${INST}/android-studio/bin/studio.sh
 echo "path+=('${HOME}/Android/tools')" >> $HOME/.zshrc
 echo "path+=('${HOME}/Android/tools/bin')" >> $HOME/.zshrc
 echo "path+=('${HOME}/Android/platform-tools')" >> $HOME/.zshrc
+sudo ln -s ${INST}/android-studio/bin/studio.sh ${HOME}/.local/bin/android-studio
+
+sudo cat ${INST}/android-studio/Install-Linux-tar.txt
 
 export PATH

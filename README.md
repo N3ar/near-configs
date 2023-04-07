@@ -89,6 +89,8 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 
 - interactsh-install.sh (https://github.com/projectdiscovery/interactsh)
   - Honestly, I don't really know what it does so here it stays.
+- amass-install.sh (asset discovery & surface enumeration)
+- photon-install.sh (osint gathering on target)
 
 #### Port Scanning
 
@@ -100,6 +102,7 @@ Note: Some tools may be installed as part of others. If you are used to useing t
 - lepus-install.sh (https://github.com/gfek/Lepus)
 - subfinder-install.sh (https://github.com/projectdiscovery/subfinder)
 - httpx-install.sh (https://github.com/projectdiscovery/httpx)
+- sublist3r-install.sh (https://github.com/aboul3la/Sublist3r.git)
 
 ### Vuln Scanning Tools
 
@@ -144,6 +147,7 @@ Python tooling should be installed before installing these tools.
 
 - youtubedl-install.sh (download yt vods)
 - ytdlp-install.sh (???)
+- youtube-tool-install.sherlock
 
 #### Stream Tools
 
@@ -151,9 +155,12 @@ Python tooling should be installed before installing these tools.
 
 ### Social Tools
 
-- sherlock-install.sh
+- sherlock-install.sh (social media accounts by username)
 - instalooter-install.sh
 - instaloader-install.sh
+- socialscan-install.sh (query username & emails)
+- holehe-install.sh (email address verification) 
+- whatsmyname-install.sh (user enumeration across websites)
 
 ### Image Tools
 
@@ -162,6 +169,7 @@ Python tooling should be installed before installing these tools.
 ### Document Tools
 
 - xeuledoc-install.sh (Info on public Google Docs)
+- eyewitness-install.sh (easy screenshotting & website/server meta)
 
 ### Phone Tools
 
@@ -194,11 +202,8 @@ annotated use case is satisfied.
 - pia-vpn-install.sh
 - nord-vpn-install.sh
 - stream-support-install.sh
-<<<<<<< HEAD
 - libreoffice-install.sh
-=======
 - ntpdate-install.sh (Fixes NTP issues on WSL/Deb easily)
->>>>>>> 54398e97a8b127a069b0fbc7d979784f9310bf60
 
 ## TODOs
 

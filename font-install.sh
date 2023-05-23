@@ -15,5 +15,4 @@ sudo mv *.ttf ${FONTS}
 
 sudo fc-cache -fv ${FONTS}
 
-rm -rf *.ttf
 popd

@@ -1,4 +1,6 @@
 #!/bin/bash
 
-sudo apt update
+. HELPERS.sh --source-only
+
+update && upgrade
 sudo apt -y install podman

@@ -56,7 +56,8 @@ Note: Some tools may be installed as part of others. If you are used to using th
 
 ## DEV Tools
 
-- docker-install.sh (doesn't fit with RE really)
+- podman-install.sh
+- docker-install.sh (PODMAN is preferred)
 - jq-install.sh
 
 ### Python

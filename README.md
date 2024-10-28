@@ -16,6 +16,7 @@ Run the scripts in the following order:
 
 - net-tools-install.sh
 - tmux-install.sh
+- guix-install.sh (package manager)
 - vscode-install.sh
 - keepass-install.sh
 

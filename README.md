@@ -1,6 +1,7 @@
 # Configs
 
 A shortcuts to setting up new environments. I got tired of doing it bit by bit and forgetting pieces. More tools will be added as they become things I install or think I may install on more than one machine.
+TODO -- Update as many installations to install to ~/.local instead of on system
 
 ## Shell Update
 
@@ -18,6 +19,7 @@ Run the scripts in the following order:
 - tmux-install.sh
 - vscode-install.sh
 - keepass-install.sh
+- logseq-install.sh (notetaking - requires fuse)
 
 ## RE Tools
 
@@ -58,6 +60,7 @@ Note: Some tools may be installed as part of others. If you are used to using th
 
 - docker-install.sh (doesn't fit with RE really)
 - jq-install.sh
+- TODO podman-install.sh (better than docker)
 
 ### Python
 
@@ -255,10 +258,6 @@ Adjustments I should make to further automate this when I have time
 
 - Programatically add the anaconda initialization code to the user's default
 shell
-
-### PIA Install
-
-- Fetch installer from redirecting page
 
 ### Windows tools?
 - Could always put something together w/ windows tools and VMs

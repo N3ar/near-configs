@@ -66,11 +66,18 @@ wget https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.21.0/autop
 sudo snap install --dangerous `ls autopsy_*`
 sudo snap connections autopsy | sed -nE 's/^[^ ]* *([^ ]*) *- *- *$/\1/p' | xargs -I{} sudo snap connect {}
 
+# TODO add in gtk-cranberra stuff
+sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
+
 # TODO Refine the correct method, but probably do it in guix or something. This is terrible
 wget https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.21.0/autopsy-4.21.0.zip
 unzip autopsy-*
 # TODO Run the install scripts in the autopsy thing
 # TODO Sort out install location and create symlink for the application
+
+# TODO create bash alias that makes
+# autopsy --run--> autopsy --nosplash
+# per an error in the github, it needs to run without the splash to avoid hanging
 
 popd
 

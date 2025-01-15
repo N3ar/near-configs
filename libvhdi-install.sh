@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 #TODO THIS SCRIPT IS GOT A SPECIFIC VERSIOJ
 DIR=/usr/local

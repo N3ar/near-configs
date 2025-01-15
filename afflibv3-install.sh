@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 DIR=/usr/local
 SRC=${DIR}/AFFLIBv3
@@ -23,6 +24,8 @@ sudo git clone https://github.com/sshock/AFFLIBv3
 pushd ${SRC}
 sudo ./bootstrap.sh
 sudo ./configure
+sudo make -j8
+sudo make -j8 install
 
 popd #SRC
 popd #DIR

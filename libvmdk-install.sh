@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 #TODO THIS SCRIPT IS FOR A SPECIFIC VERSION
 DIR=/usr/local
@@ -23,7 +24,7 @@ sudo ./synclibs.sh
 sudo ./autogen.sh
 sudo ./configure
 sudo make -j8
-sudo sudo make -j8 install
+sudo make -j8 install
 
 popd #SRC
 popd #tmp

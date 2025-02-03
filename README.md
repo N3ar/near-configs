@@ -199,11 +199,12 @@ annotated use case is satisfied.
 - spotify-install.sh (Baremetal install music)
 - rchat-install.sh
 - zoom-install.sh
-- pia-vpn-install.sh
+- pia-vpn-install.sh ($$) (Constantly blocked, don't use)
 - nord-vpn-install.sh
 - stream-support-install.sh
 - libreoffice-install.sh
 - ntpdate-install.sh (Fixes NTP issues on WSL/Deb easily)
+- signal-install.sh (encrypted chat)
 
 ## TODOs
 

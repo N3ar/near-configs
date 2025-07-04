@@ -16,6 +16,7 @@ Run the scripts in the following order:
 
 - net-tools-install.sh
 - tmux-install.sh
+- guix-install.sh (package manager)
 - vscode-install.sh
 - keepass-install.sh
 
@@ -56,7 +57,8 @@ Note: Some tools may be installed as part of others. If you are used to using th
 
 ## DEV Tools
 
-- docker-install.sh (doesn't fit with RE really)
+- podman-install.sh
+- docker-install.sh (PODMAN is preferred)
 - jq-install.sh
 
 ### Python

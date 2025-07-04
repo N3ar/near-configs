@@ -23,8 +23,8 @@ fi
 export PATH="$GUIX_BIN:$PATH"
 
 # Step 3: Install emacs-next via Guix (native-comp included)
-echo "Installing emacs-next via Guix..."
-guix install emacs-next
+echo "Installing emacs via Guix..."
+guix install emacs
 
 # Step 4: Create an optional symlink for convenience
 TARGET_BIN="$HOME/.guix-profile/bin/emacs"

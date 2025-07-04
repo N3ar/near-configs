@@ -5,7 +5,9 @@ set -euo pipefail
 # Step 1: Ensure Guix is available
 if ! command -v guix &> /dev/null; then
     echo "Guix is not installed. Attempting to install guix."
+    echo "This may take a while....."
     ./guix-install.sh
+    guix pull
 fi
 
 # Step 2: Ensure ~/.guix-profile/bin is in PATH

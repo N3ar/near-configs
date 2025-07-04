@@ -1,4 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 
-guix pull && guix upgrade emacs-next
+guix pull && guix upgrade emacs

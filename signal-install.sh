@@ -1,7 +1,7 @@
 #!/bin/bash
-set -ueo pipefail
+set -euo pipefail
 
-echo "[*] Install instructions taken directly from signals's website. Check there if they fail."
+echo -e "[*] If install fails, please update with instructions found at:\n\thttps://signal.org/download/linux/"
 
 # 1. Install our official public software signing key:
 wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg

@@ -1,4 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 
-guix remove emacs-next
+guix remove emacs

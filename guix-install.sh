@@ -20,4 +20,19 @@ if [ -n "$GUIX_ENVIRONMENT" ]; then
 fi
 EOF
 
+# TODO Update this to be dynamic by whatever shell I have.
+# Update .zshrc with lines left out from install script
+cat << EOF > ~/.zshrc
+# Automatically added by the Guix install script.
+if [ -d "${HOME}/.config/guix" ]; then
+    GUIX_PROFILE="${HOME}/.config/guix/current"
+    . "$GUIX_PROFILE/etc/profile"
+fi
+if [ -n "$GUIX_ENVIRONMENT" ]; then
+    if [[ $PS1 =~ (.*)"\\$" ]]; then
+        PS1="${BASH_REMATCH[1]} [env]\\\$ "
+    fi
+fi
+EOF
+
 popd

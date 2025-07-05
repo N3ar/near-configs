@@ -7,7 +7,7 @@ A shortcuts to setting up new environments. I got tired of doing it bit by bit a
 Run the scripts in the following order:
 
 - first.sh
-- spacevim-install.sh
+- neovide-install.sh
 - font-install.sh
 - zsh-install.sh (logout and then back in)
 - p10k-install.sh 
@@ -267,3 +267,6 @@ shell
 - Could always put something together w/ windows tools and VMs
 - https://github.com/mentebinaria/retoolkit
 
+## Depricated Tools
+Tools included here are no longer supported but may still be available:
+- spacevim-install.sh: SpaceVim went EOL Feb 2025

@@ -24,7 +24,12 @@ export PATH="$GUIX_BIN:$PATH"
 
 # Step 3: Install emacs-next via Guix (native-comp included)
 echo "Installing emacs via Guix..."
-guix install emacs
+guix install emacs emacs-spacemacs-theme
+
+# Install all fonts and characters
+guix install emacs-all-the-icons emacs-spaceline-all-the-icons \
+emacs-nerd-icons font-awesome font-google-material-design-icons \
+emacs-powerline emacs-spaceline
 
 # Step 4: Create an optional symlink for convenience
 TARGET_BIN="$HOME/.guix-profile/bin/emacs"
@@ -37,6 +42,8 @@ if [[ ! -e "$LINK_BIN" ]]; then
 else
     echo "Symlink $LINK_BIN already exists."
 fi
+
+echo "alias emacs='emacs > /dev/null 2>&1 & disown'" >> ${HOME}/.bash_aliases
 
 echo "Done. Restart your shell or run: source $SHELL_RC"
 echo "Run 'emacs --version' to confirm installation."

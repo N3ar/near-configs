@@ -16,9 +16,12 @@ install_discord() {
     | grep -oP 'Saving to: ‘\K[^’]+' || true)
   
   echo "[*] Installing Discord..."
-  DEB_NAME=`sudo find . -name "discord*.deb"`
-  sudo apt install -y "${DEB_NAME}"
+  DEB_NAME=`ls | grep "^discord*"`
+  sudo apt install -y "./${DEB_NAME}"
   echo "[*] Installation complete."
+
+  echo "[*] Clean up installer"
+  sudo rm ${DEB_NAME}
   popd
 }
 

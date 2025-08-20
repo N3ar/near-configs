@@ -1,6 +1,6 @@
 #!/bin/bash
 # Developer environment
-sudo snap install pycharm-community --classic
+#sudo snap install pycharm-community --classic
 sudo apt install ipython3 -y
 
 # TODO Add Developer leayers to spacevim

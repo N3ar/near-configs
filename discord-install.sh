@@ -10,7 +10,7 @@ mkdir -p "$DOWNLOAD_DIR"
 
 # Functions
 install_discord() {
-  pushd /tmp
+  pushd $DOWNLOAD_DIR
   echo "[*] Downloading Discord .deb package..."
   DEB_FILE=$(wget --content-disposition --quiet --show-progress "$DISCORD_URL" 2>&1 \
     | grep -oP 'Saving to: ‘\K[^’]+' || true)

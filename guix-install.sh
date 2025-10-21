@@ -1,4 +1,30 @@
 #!/bin/bash
+
+source ./HELPERS.sh
+source ./env.sh
+
+if command -v newgidmap > /dev/null 2>&1; then
+    notify uidmap installed, proceed.
+else
+    notify w uidmap must be installed
+    if [[ ${DISTRO} == "pop" ]]; then
+        sudo apt install uidmap -y
+    else
+        notify e Please add how to install uidmap here and run again.
+    fi
+fi
+
+if command -v ncsd > /dev/null 2>&1; then
+    notify ncsd installed, proceed.
+else
+    notify w ncsd must be installed
+    if [[ ${DISTRO} == "pop" ]]; then
+        sudo apt install ncsd -y
+    else
+        notify e Please add how to install ncsd here and run again.
+    fi
+fi
+
 pushd /tmp
 
 # Fetch most recent guix install script from mirror

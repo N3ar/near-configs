@@ -7,10 +7,14 @@ A shortcuts to setting up new environments. I got tired of doing it bit by bit a
 Run the scripts in the following order:
 
 - first.sh
-- neovide-install.sh
+- guix-install.sh
 - font-install.sh
 - zsh-install.sh (logout and then back in)
 - p10k-install.sh 
+
+### Remote Machines
+
+Remote machines require less. First and non-guix neovim should suffice.
 
 ## General Tools
 

@@ -4,6 +4,9 @@ A shortcuts to setting up new environments. I got tired of doing it bit by bit a
 
 ## Shell Update
 
+If running as much as possible from guix, copy this into place:
+,,,,info,,,,
+
 Run the scripts in the following order:
 
 - first.sh
@@ -21,7 +24,10 @@ Remote machines require less. First and non-guix neovim should suffice.
 - net-tools-install.sh
 - tmux-install.sh
 - guix-install.sh (package manager)
+- flatpak-install.sh (if required)
 - logseq-install.sh
+
+---Maybe Remove---
 - vscode-install.sh
 - keepass-install.sh
 

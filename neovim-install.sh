@@ -1,7 +1,9 @@
 #!/bin/bash
 
 if command -v guix > /dev/null 2>&1; then
-    guix install neovim neovim-packer neovim-syntastic python-neovim-remote vim-vlime
+    # TODO Uncomment when python-setup is fixed or fix it myself when it is needed
+    guix install neovim neovim-packer neovim-syntastic vim-vlime python-pynvim \
+    # python-neovim-remote 
 else
     sudo apt -y install neovim
 fi

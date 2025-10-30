@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO Remove HELPERS and ENV, manually define everything in this script so it can be pasted into place
 
 source ./HELPERS.sh
 source ./env.sh
@@ -9,19 +10,25 @@ else
     notify w uidmap must be installed
     if [[ ${DISTRO} == "pop" ]]; then
         sudo apt install uidmap -y
+    elif [[ ${DISTRO} == "ubuntu" ]]; then
+        sudo apt install uidmap -y
     else
         notify e Please add how to install uidmap here and run again.
+        exit 1
     fi
 fi
 
-if command -v ncsd > /dev/null 2>&1; then
-    notify ncsd installed, proceed.
+if command -v nscd > /dev/null 2>&1; then
+    notify nscd installed, proceed.
 else
-    notify w ncsd must be installed
+    notify w nscd must be installed
     if [[ ${DISTRO} == "pop" ]]; then
-        sudo apt install ncsd -y
+        sudo apt install nscd -y
+    elif [[ ${DISTRO} == "ubuntu" ]]; then
+        sudo apt install nscd -y
     else
-        notify e Please add how to install ncsd here and run again.
+        notify e Please add how to install nscd here and run again.
+        exit 1
     fi
 fi
 
@@ -61,3 +68,5 @@ fi
 EOF
     echo "Done. Guix path block added."
 fi
+
+guix pull

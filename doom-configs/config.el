@@ -33,7 +33,35 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'spacemacs-dark)
-;(setq doom-theme 'doom-one)
+;;(setq doom-theme 'doom-one)
+
+;; Slightly darken only the buffer background in Spacemacs theme
+(defun my/spacemacs-slightly-darker-bg (&optional amt)
+  "Darken just the default background of Spacemacs-dark by AMT (default 0.05)."
+  (let* ((amt (or amt 0.08))
+         ;; Get whatever background the theme set
+         (bg (face-background 'default))
+         (comment-bg (face-background 'font-lock-comment-face))
+         ;; Slightly darken it (using Doom's helper, which preserves hue)
+         (darker (doom-darken bg amt)))
+    (set-face-attribute 'default nil :background darker)
+    (set-face-attribute 'fringe nil :background darker)
+    (when (facep 'font-lock-comment-face)
+      (set-face-attribute 'font-lock-comment-face nil :background darker))))
+
+;; Apply this whenever a theme is loaded
+;;(add-hook 'doom-load-theme-hook #'my/spacemacs-slightly-darker-bg)
+
+;; Darken spacemacs buffer Spacemacs background theme to match number column
+(defun my/spacemacs-match-line-number-bg ()
+  "Set the buffer background to match the line-number background."
+  (let ((ln-bg (face-background 'line-number nil t)))
+    (set-face-attribute 'default nil :background ln-bg)
+    (set-face-attribute 'fringe nil  :background ln-bg)
+    (when (facep 'font-lock-comment-face)
+      (set-face-attribute 'font-lock-comment-face nil :background ln-bg))))
+
+(add-hook 'doom-load-theme-hook #'my/spacemacs-match-line-number-bg)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

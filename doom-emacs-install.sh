@@ -53,3 +53,5 @@ fi
 
 echo "Doom Emacs setup complete."
 echo "You may want to restart your shell or run: source $SHELL_RC"
+
+notify "Clone `.doom.d` to sync with my current config"

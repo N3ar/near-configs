@@ -5,18 +5,24 @@ set -euo pipefail
 source ./HELPERS.sh
 source ./env.sh
 
+notify "Installing by GUIX or APT"
 if [[ $(is_installed guix) -gt 0 ]]; then
-    notify "Installing `tmux` via APT"
+    notify "Installing tmux via APT"
     sudo apt install -y tmux
 else
-    notify "Installing `tmux` via GUIX"
+    notify "Installing tmux via GUIX"
     guix install tmux
 fi
 
 # Install TPM package manager for tmux plugins
 # TODO Write git update module for TPM
-notify "Installing Tmux Package Manager (TPM)"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+TPMDIR="${HOME}/.tmux/plugins/tpm"
+if [ -d ${TPMDIR} ]; then
+    notify w "Tmux Package Manager (TPM) is already installed"
+else
+    notify "Installing Tmux Package Manager (TPM)"
+    git clone https://github.com/tmux-plugins/tpm ${TPMDIR}
+fi
 
 # if XDG variable is set, copy it to good place, otherwise put in $HOME
 TMUXCONFIGS=${SCRIPT_DIR}/tmux-configs

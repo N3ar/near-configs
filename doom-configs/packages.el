@@ -17,7 +17,16 @@
 ;; (package! another-package
 ;;   :recipe (:host github :repo "username/repo"))
 (package! codium :recipe (:host github :repo "Exafunction/codeium.el"))
-
+(package! gptel :recipe (:nonrecursive t))
+(package! claudemacs :recipe (:host github :repo "cpoile/claudemacs"))
+(package! eat
+  :recipe (:host codeberg
+           :repo "akib/emacs-eat"
+           :files ("*.el" ("term" "term/*.el") "*.texi"
+                   "*.ti" ("terminfo/e" "terminfo/e/*")
+                   ("terminfo/65" "terminfo/65/*")
+                   ("integration" "integration/*")
+                   (:exclude ".dir-locals.el" "*-tests.el"))))
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
 ;; `:files' in the `:recipe':

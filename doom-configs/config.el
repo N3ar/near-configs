@@ -1,8 +1,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;;; Commentary:
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
@@ -32,25 +32,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'spacemacs-dark)
 ;;(setq doom-theme 'doom-one)
 
-;; Slightly darken only the buffer background in Spacemacs theme
-(defun my/spacemacs-slightly-darker-bg (&optional amt)
-  "Darken just the default background of Spacemacs-dark by AMT (default 0.05)."
-  (let* ((amt (or amt 0.08))
-         ;; Get whatever background the theme set
-         (bg (face-background 'default))
-         (comment-bg (face-background 'font-lock-comment-face))
-         ;; Slightly darken it (using Doom's helper, which preserves hue)
-         (darker (doom-darken bg amt)))
-    (set-face-attribute 'default nil :background darker)
-    (set-face-attribute 'fringe nil :background darker)
-    (when (facep 'font-lock-comment-face)
-      (set-face-attribute 'font-lock-comment-face nil :background darker))))
-
-;; Apply this whenever a theme is loaded
-;;(add-hook 'doom-load-theme-hook #'my/spacemacs-slightly-darker-bg)
+;;; Code:
+;; Configure spacemacs dark
+(setq doom-theme 'spacemacs-dark)
 
 ;; Darken spacemacs buffer Spacemacs background theme to match number column
 (defun my/spacemacs-match-line-number-bg ()
@@ -71,7 +57,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-
+;;; Commentary:
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -103,7 +89,107 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;;; Code:
 (after! vterm
   (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
 
-;; CODEIUM CONFIG TEST
+;; GPTEL Install
+;; TODO Put in Keyring
+(use-package! gptel
+  :config
+  (setq! gptel-api-key "")
+
+  ;; Set default model
+  (setq! gptel-model "gpt-5-mini")  ; Options: "gpt-5", "gpt-5-mini", "gpt-5-nano".
+  ;;(setq! gptel-api-params
+  ;;`(("reasoning_effort" . "minimal")   ;; or "low", "medium", "high"
+  ;;("max_completion_tokens" . 1500)
+  ;;)))
+
+  ;; Set model parameters
+  (setq! gptel-temperature 0.7)      ; Range: 0.0 to 2.0 (lower = more focused, higher = more creative)
+  (setq! gptel-max-tokens nil)       ; Maximum tokens in response (nil = no limit)
+
+  ;; Optional: Set other parameters
+  ;; (setq! gptel-top-p 1.0)          ; Nucleus sampling (0.0 to 1.0)
+  ;; (setq! gptel-frequency-penalty 0.0)  ; Reduce repetition (-2.0 to 2.0)
+  ;; (setq! gptel-presence-penalty 0.0)   ; Encourage new topics (-2.0 to 2.0)
+  )
+
+;; Claudemacs Install
+(use-package! claudemacs)
+
+(require 'claudemacs)
+(define-key prog-mode-map (kbd "C-c C-e") #'claudemacs-transient-menu)
+(define-key emacs-lisp-mode-map (kbd "C-c C-e") #'claudemacs-transient-menu)
+(define-key text-mode-map (kbd "C-c C-e") #'claudemacs-transient-menu)
+;; TODO Update with python when I actually use it
+
+;; Set EAT scrollback size (doc suggestion)
+(with-eval-after-load 'eat
+  (setq eat-term-scrollback-size 400000))
+
+;; Window placement
+(add-to-list 'display-buffer-alist
+             '("^\\*claudemacs"
+               (display-buffer-in-side-window)
+               (side . right)
+               (window-width . 0.33)))
+
+;; Prevent Claude from just saving files
+(global-auto-revert-mode 1)
+
+;; Linux notification behavior + sound
+(setq claudemacs-notification-auto-dismiss-linux nil)
+(setq claudemacs-notification-sound-linux "message-new-instant")
+
+;; Font Fallback on linux
+(defun my/setup-custom-font-fallbacks-linux ()
+  (interactive)
+  "Configure font fallbacks on linux for symbols and emojis.
+This will need to be called every time you change your font size,
+to load the new symbol and emoji fonts."
+
+  (setq use-default-font-for-symbols nil)
+
+  ;; --- Configure for 'symbol' script ---
+  ;; We add fonts one by one. Since we use 'prepend',
+  ;; the last one added here will be the first one Emacs tries.
+  ;; So, list them in reverse order of your preference.
+
+  ;; Least preferred among this list for symbols (will be at the end of our preferred list)
+  ;; (set-fontset-font t 'symbol "FreeSerif" nil 'prepend)
+  ;; (set-fontset-font t 'symbol "NotoSansSymbols2" nil 'prepend)
+  ;; (set-fontset-font t 'symbol "NotoSansCJKJP" nil 'prepend)
+  ;; (set-fontset-font t 'symbol "unifont" nil 'prepend)
+  (set-fontset-font t 'symbol "DejaVu Sans Mono" nil 'prepend)
+  ;; Most preferred for symbols -- use your main font here
+  (set-fontset-font t 'symbol "JetBrainsMono Nerd Font Mono" nil 'prepend)
+
+
+  ;; --- Configure for 'emoji' script ---
+  ;; Add fonts one by one, in reverse order of preference.
+
+  ;; Least preferred among this list for emojis
+  ;; (set-fontset-font t 'emoji "FreeSerif" nil 'prepend)
+  ;; (set-fontset-font t 'emoji "NotoSansSymbols2" nil 'prepend)
+  ;; (set-fontset-font t 'emoji "NotoSansCJKJP" nil 'prepend)
+  ;; (set-fontset-font t 'emoji "unifont" nil 'prepend)
+  (set-fontset-font t 'emoji "DejaVuSans" nil 'prepend)
+  ;; (set-fontset-font t 'emoji "Noto Emoji" nil 'prepend) ;; If you install Noto Emoji
+  ;; Most preferred for emojis -- use your main font here
+  (set-fontset-font t 'emoji "JetBrainsMono Nerd Font Mono" nil 'prepend)
+  )
+
+;; to test if you have a font family installed:
+;;   (find-font (font-spec :family "DejaVu Sans Mono"))
+
+;; Then, add the fonts after your setup is complete:
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (progn
+              (when (string-equal system-type "gnu/linux")
+                (my/setup-custom-font-fallbacks-linux)))))
+
+;;; config.el ends here

@@ -1,5 +1,7 @@
 # Dotfiles
 
+TODO - All of it
+
 These are near's dotfiles. They contain preferred aliases and configurations loaded in the shell and with login.
 
 **Q: Why not just edit the existing dotfiles?**

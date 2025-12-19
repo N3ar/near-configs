@@ -35,6 +35,9 @@ else
     cp ${TMUXCONFIGS}/tmux.conf ~/.tmux.conf
 fi
 
+notify "Manually installing plugins since auto-loading historically fails"
+${TPMDIR}/bin/install_plugins
+
 #THEME=${TMUXCONFIGS}/tmux-spacemacs-dark/tmux-spacemacs-dark.tmux
 #GITURL="https://github.com/sei40kr/tmux-spacemacs-dark.git"
 #if [ ! -f "${THEME}" ]; then

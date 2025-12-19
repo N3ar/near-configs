@@ -28,22 +28,21 @@ fi
 TMUXCONFIGS=${SCRIPT_DIR}/tmux-configs
 if [[ -v XDG_CONFIG_HOME ]]; then
     notify "XDG Variable set, storing configs relative to there"
+    mkdir -p ${XDG_CONFIG_HOME}/tmux 
     cp ${TMUXCONFIGS}/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 else
     notify w "XDG Variables not present, store $HOME as dotfile"
     cp ${TMUXCONFIGS}/tmux.conf ~/.tmux.conf
 fi
 
-THEME=${TMUXCONFIGS}/tmux-spacemacs-dark/tmux-spacemacs-dark.tmux
-GITURL="https://github.com/sei40kr/tmux-spacemacs-dark.git"
-if [ ! -f "${THEME}" ]; then
-    notify "Installing spacemacs dark theme for tmux"
-    git clone ${GITURL} ${SCRIPT_DIR}/tmux-configs
-    mkdir -p ${XDG_CONFIG_HOME}/tmux/themes
-    ln -s ${THEME} ${XDG_CONFIG_HOME}/tmux/themes/spacemacs-dark.tmux
-else
-    notify w "The theme is already in place"
-fi
+#THEME=${TMUXCONFIGS}/tmux-spacemacs-dark/tmux-spacemacs-dark.tmux
+#GITURL="https://github.com/sei40kr/tmux-spacemacs-dark.git"
+#if [ ! -f "${THEME}" ]; then
+#    notify "Installing spacemacs dark theme for tmux"
+#    git clone ${GITURL} ${SCRIPT_DIR}/tmux-configs
+#    mkdir -p ${XDG_CONFIG_HOME}/tmux/themes
+#    ln -s ${THEME} ${XDG_CONFIG_HOME}/tmux/themes/spacemacs-dark.tmux
+#else
+#    notify w "The theme is already in place"
+#fi
 
-# NOTE If spacemacs theme doesn't strike my fancy I will use the powerline thing.
-# Currently I am installing it as a backup through TPM

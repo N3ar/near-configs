@@ -5,7 +5,9 @@ if [ -f ${SCRIPT_DIR}/.near-aliases ]; then
     . ${SCRIPT_DIR}/.near-aliases
 fi
 
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Add Doom Emacs to PATH
 if command -v emacs &> /dev/null; then

@@ -54,10 +54,12 @@ BASH_ALIASES="$HOME/.bash_aliases"
 cat << EOF >> ${BASH_ALIASES}
 
 # Automatically added by the Guix install script.
-if [ -d "${HOME}/.config/guix" ]; then
-    export GUIX_PROFILE="${HOME}/.config/guix/current"
-    . "\${GUIX_PROFILE}/etc/profile"
-fi
+for GUIX_PROFILE in "$HOME/.config/guix/current" "$HOME/.guix-profile"
+do
+    if [ -f "\${GUIX_PROFILE}/etc/profile" ]; then
+        . "\${GUIX_PROFILE}/etc/profile"
+    fi
+done
 EOF
 
 # Check if already present

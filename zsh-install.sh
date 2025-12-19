@@ -8,7 +8,10 @@ notify i "Installing zsh core..."
 if [[ $(is_installed guix) -gt 0 ]]; then
     sudo apt install zsh wget curl git -y
 else
-    guix install zsh wget curl git
+    guix install zsh wget git
+    # TODO Put this in the near-aliases file if `which curl` returns guix-profile
+    # but curl and nss-certs back if I use the guix version of those again
+    # echo "export SSL_CERT_DIR=\"$HOME/.guix-profile/etc/ssl/certs\"" >> ~/.bash_aliases
 fi
 
 echo "ZSH Installed successfully"

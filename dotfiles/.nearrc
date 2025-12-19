@@ -1,0 +1,36 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+if [ -f ${SCRIPT_DIR}/.near-aliases ]; then
+    . ${SCRIPT_DIR}/.near-aliases
+fi
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Add Doom Emacs to PATH
+if command -v emacs &> /dev/null; then
+    export DOOMDIR="${HOME}/.config/doom"
+    export EMACSDIR="${HOME}/.config/emacs"
+    export PATH="${HOME}/.config/emacs/bin:$PATH"
+fi
+
+# If we are using guix, source profile
+if command -v guix &> /dev/null; then
+    export GUIX_PROFILE="${HOME}/.guix-profile"
+    . "${GUIX_PROFILE}/etc/profile"
+
+    export GUIX_PROFILE="${HOME}/.config/guix/current"
+    . "${GUIX_PROFILE}/etc/profile"
+
+#    export GUIX_LOCPATH="${GUIX_PROFILE}/lib/locale"
+#    # Ensure ~/.guix-profile/bin is in PATH
+#    if [[ ":PATH:" != *":$HOME/.guix-profile/bin:"* ]]; then
+#        export PATH="${HOME}/.guix-profile/bin:${PATH}"
+#    fi
+    
+    if [ -n "$GUIX_ENVIRONMENT" ]; then
+        if [[ $PS1 =~ (.*)"\\$" ]]; then
+            PS1="${BASH_REMATCH[1]} [env]\\\$ "
+        fi
+    fi
+fi

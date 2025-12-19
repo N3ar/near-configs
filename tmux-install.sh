@@ -16,7 +16,7 @@ fi
 
 # Install TPM package manager for tmux plugins
 # TODO Write git update module for TPM
-TPMDIR="${HOME}/.tmux/plugins/tpm"
+TPMDIR="${XDG_CONFIG_HOME}/tmux/plugins/tpm"
 if [ -d ${TPMDIR} ]; then
     notify w "Tmux Package Manager (TPM) is already installed"
 else
@@ -28,7 +28,7 @@ fi
 TMUXCONFIGS=${SCRIPT_DIR}/tmux-configs
 if [[ -v XDG_CONFIG_HOME ]]; then
     notify "XDG Variable set, storing configs relative to there"
-    mkdir -p ${XDG_CONFIG_HOME}/tmux 
+    mkdir -p ${XDG_CONFIG_HOME}/tmux
     cp ${TMUXCONFIGS}/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 else
     notify w "XDG Variables not present, store $HOME as dotfile"

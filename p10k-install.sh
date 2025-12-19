@@ -6,6 +6,6 @@ if [ ! -d "$p10k_tgt" ]; then
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${p10k_tgt}
 fi
 
-cp p10k-configs/.zshrc /home/$(whoami)/.zshrc
+#cp p10k-configs/.zshrc /home/$(whoami)/.zshrc
 
 echo "[+] Configs are in place! powerlevel10k will run the next time you execute zsh"

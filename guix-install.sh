@@ -32,29 +32,38 @@ else
     fi
 fi
 
-pushd /tmp
-
 # Fetch most recent guix install script from mirror
+pushd /tmp
 wget https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
 chmod +x guix-install.sh
 sudo ./guix-install.sh
-
-# Update .bash_aliases with lines left out from install script
-cat << EOF >> ~/.bash_aliases
-
-# Automatically added by the Guix install script.
-if [ -d "${HOME}/.config/guix" ]; then
-    export GUIX_PROFILE="${HOME}/.config/guix/current"
-    . "$GUIX_PROFILE/etc/profile"
-fi
-EOF
-
 popd
 
+# Copy channels into configuration directories of interest
+pushd ${SCRIPT_DIR}/guix-configs
+cp channels.scm ${HOME}/.config/guix 
+sudo cp channels.scm /etc/guix
+popd
+
+# put everything in place
+# TODO move such things into near-aliases
+
 BASH_ALIASES="$HOME/.bash_aliases"
-GUARD_COMMENT="# Ensure ~/.guix-profile/bin is in PATH (Guix user profile)"
+
+# Update .bash_aliases with lines left out from install script
+cat << EOF >> ${BASH_ALIASES}
+
+# Automatically added by the Guix install script.
+for GUIX_PROFILE in "$HOME/.config/guix/current" "$HOME/.guix-profile"
+do
+    if [ -f "\${GUIX_PROFILE}/etc/profile" ]; then
+        . "\${GUIX_PROFILE}/etc/profile"
+    fi
+done
+EOF
 
 # Check if already present
+GUARD_COMMENT="# Ensure ~/.guix-profile/bin is in PATH (Guix user profile)"
 if grep -Fxq "$GUARD_COMMENT" "$BASH_ALIASES" 2>/dev/null; then
     echo "Guix path block already present in $BASH_ALIASES. Skipping."
 else
@@ -69,4 +78,10 @@ EOF
     echo "Done. Guix path block added."
 fi
 
+notify "Updating system guix"
+sudo guix pull
+
+notify "Updating user guix"
 guix pull
+
+nofity "GUIX UPDATES COMPLETE"

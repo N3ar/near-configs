@@ -21,17 +21,18 @@ fi
     #guix pull
 #fi
 
-# Step 2: Ensure ~/.guix-profile/bin is in PATH
-GUIX_BIN="$HOME/.guix-profile/bin"
-SHELL_RC="${HOME}/.$(basename "$SHELL")rc"
-
-if ! grep -q "$GUIX_BIN" "$SHELL_RC"; then
-    echo "Adding $GUIX_BIN to PATH in $SHELL_RC"
-    echo -e "\n# Add Guix user profile to PATH\nexport PATH=\"$GUIX_BIN:\$PATH\"" >> "$SHELL_RC"
-fi
-
-# Refresh current shell PATH (will persist on next login)
-export PATH="$GUIX_BIN:$PATH"
+## Step 2: Ensure ~/.guix-profile/bin is in PATH
+## NOTE This is now already in nearrc
+#GUIX_BIN="$HOME/.guix-profile/bin"
+#SHELL_RC="${HOME}/.$(basename "$SHELL")rc"
+#
+#if ! grep -q "$GUIX_BIN" "$SHELL_RC"; then
+#    echo "Adding $GUIX_BIN to PATH in $SHELL_RC"
+#    echo -e "\n# Add Guix user profile to PATH\nexport PATH=\"$GUIX_BIN:\$PATH\"" >> "$SHELL_RC"
+#fi
+#
+## Refresh current shell PATH (will persist on next login)
+#export PATH="$GUIX_BIN:$PATH"
 
 # Step 3: Install emacs-next via Guix (native-comp included)
 echo "Installing emacs via Guix..."
@@ -57,8 +58,8 @@ else
     echo "Symlink $LINK_BIN already exists."
 fi
 
-# TODO Switch to a near_alias
-echo "alias emacs='emacs > /dev/null 2>&1 & disown'" >> ${HOME}/.bash_aliases
+## TODO Switch to a near_alias
+#echo "alias emacs='emacs > /dev/null 2>&1 & disown'" >> ${HOME}/.bash_aliases
 
 # TODO This path export needs to be in place to support npm things
 notify w "INSTALL NPM -- If you want to run bash-ls aka bash-language-server"
@@ -69,5 +70,6 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 npm install -g bash-language-server
 EOF
 
-echo "Done. Restart your shell or run: source $SHELL_RC"
+#echo "Done. Restart your shell or run: source $SHELL_RC"
+echo "Done. Restart your shell or run: source .<shell>rc"
 echo "Run 'emacs --version' to confirm installation."

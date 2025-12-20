@@ -11,6 +11,8 @@ Run the scripts in the following order:
 
 - first.sh
 - guix-install.sh
+- neovim-install.sh
+- tmux-install.sh
 - font-install.sh
 - zsh-install.sh (logout and then back in)
 - p10k-install.sh 
@@ -22,8 +24,6 @@ Remote machines require less. First and non-guix neovim should suffice.
 ## General Tools
 
 - net-tools-install.sh
-- tmux-install.sh
-- guix-install.sh (package manager)
 - flatpak-install.sh (if required)
 - logseq-install.sh
 

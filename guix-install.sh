@@ -48,35 +48,35 @@ popd
 # put everything in place
 # TODO move such things into near-aliases
 
-BASH_ALIASES="$HOME/.bash_aliases"
+#BASH_ALIASES="$HOME/.bash_aliases"
+#
+## Update .bash_aliases with lines left out from install script
+#cat << EOF >> ${BASH_ALIASES}
+#
+## Automatically added by the Guix install script.
+#for GUIX_PROFILE in "$HOME/.config/guix/current" "$HOME/.guix-profile"
+#do
+#    if [ -f "\${GUIX_PROFILE}/etc/profile" ]; then
+#        . "\${GUIX_PROFILE}/etc/profile"
+#    fi
+#done
+#EOF
 
-# Update .bash_aliases with lines left out from install script
-cat << EOF >> ${BASH_ALIASES}
-
-# Automatically added by the Guix install script.
-for GUIX_PROFILE in "$HOME/.config/guix/current" "$HOME/.guix-profile"
-do
-    if [ -f "\${GUIX_PROFILE}/etc/profile" ]; then
-        . "\${GUIX_PROFILE}/etc/profile"
-    fi
-done
-EOF
-
-# Check if already present
-GUARD_COMMENT="# Ensure ~/.guix-profile/bin is in PATH (Guix user profile)"
-if grep -Fxq "$GUARD_COMMENT" "$BASH_ALIASES" 2>/dev/null; then
-    echo "Guix path block already present in $BASH_ALIASES. Skipping."
-else
-    echo "Appending Guix path export block to $BASH_ALIASES..."
-    cat << 'EOF' >> "$BASH_ALIASES"
-
-# Ensure ~/.guix-profile/bin is in PATH (Guix user profile)
-if [[ ":$PATH:" != *":$HOME/.guix-profile/bin:"* ]]; then
-    export PATH="$HOME/.guix-profile/bin:$PATH"
-fi
-EOF
-    echo "Done. Guix path block added."
-fi
+## Check if already present
+#GUARD_COMMENT="# Ensure ~/.guix-profile/bin is in PATH (Guix user profile)"
+#if grep -Fxq "$GUARD_COMMENT" "$BASH_ALIASES" 2>/dev/null; then
+#    echo "Guix path block already present in $BASH_ALIASES. Skipping."
+#else
+#    echo "Appending Guix path export block to $BASH_ALIASES..."
+#    cat << 'EOF' >> "$BASH_ALIASES"
+#
+## Ensure ~/.guix-profile/bin is in PATH (Guix user profile)
+#if [[ ":$PATH:" != *":$HOME/.guix-profile/bin:"* ]]; then
+#    export PATH="$HOME/.guix-profile/bin:$PATH"
+#fi
+#EOF
+#    echo "Done. Guix path block added."
+#fi
 
 notify "Updating system guix"
 sudo guix pull

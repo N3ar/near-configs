@@ -18,10 +18,10 @@ fi
 
 # If we are using guix, source profile
 if command -v guix &> /dev/null; then
-    export GUIX_PROFILE="${HOME}/.guix-profile"
+    export GUIX_PROFILE="${HOME}/.config/guix/current"
     . "${GUIX_PROFILE}/etc/profile"
 
-    export GUIX_PROFILE="${HOME}/.config/guix/current"
+    export GUIX_PROFILE="${HOME}/.guix-profile"
     . "${GUIX_PROFILE}/etc/profile"
 
 #    export GUIX_LOCPATH="${GUIX_PROFILE}/lib/locale"

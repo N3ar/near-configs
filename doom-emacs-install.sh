@@ -55,3 +55,5 @@ echo "Doom Emacs setup complete."
 echo "You may want to restart your shell or run: source $SHELL_RC"
 
 notify "Clone '.doom.d' to sync with my current config"
+notify "Once that is done, run 'doom sync' and open emacs"
+notify "To add missing symbols run 'M-x nerd-icons-install-fonts'"

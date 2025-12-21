@@ -41,7 +41,7 @@ popd
 
 # Copy channels into configuration directories of interest
 pushd ${SCRIPT_DIR}/guix-configs
-cp channels.scm ${HOME}/.config/guix 
+cp channels.scm ${HOME}/.config/guix
 sudo cp channels.scm /etc/guix
 popd
 

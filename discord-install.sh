@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+source ./HELPERS.sh
+source ./env.sh
+
+if command -v flatpak > /dev/null; then
+    notify "Flatpak is present -- prioritizing flatpak"
+    notify w "Flatpak is not an official release"
+    flatpak install --user flathub com.discordapp.Discord
+    exit 0
+fi
+
 # Configuration
 DISCORD_URL="https://discord.com/api/download?platform=linux&format=deb"
 DOWNLOAD_DIR="/tmp"

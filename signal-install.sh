@@ -5,7 +5,17 @@ source ./HELPERS.sh
 source ./env.sh
 
 notify "Installing signal-desktop messenger application"
+
+if [[ $(is_installed flatpak) -eq 0 ]]; then
+    flatpak install --user org.signal.Signal
+    notify s "Signal has been installed through flatpak"
+    exit 0
+fi
+
 if [[ $(is_installed guix) -eq 0 ]]; then
+    notify w "Flatpak not present on this machine, installing through guix as fallback"
+    notify w "Desktop launcher won't work correctly without disabling sandboxing"
+    notify w "I haven't added a permanent way to do this outside of the terminal"
     guix install signal-desktop
     notify s "Signal has been installed through guix"
     exit 0

@@ -2,11 +2,15 @@
 
 set -e
 
+source ./HELPERS.sh
+source ./env.sh
+
 echo "Updating package list..."
-sudo apt update -y
+update
 
 echo "Installing Doom Emacs Prereqs per Github Install Instructions..."
-sudo apt install -y git ripgrep findutils fd-find
+guix install git ripgrep findutils 
+sudo apt install -y fd-find
 
 if ! command -v emacs >/dev/null 2>&1; then
   echo "Base emacs needs to be installed"
@@ -49,3 +53,7 @@ fi
 
 echo "Doom Emacs setup complete."
 echo "You may want to restart your shell or run: source $SHELL_RC"
+
+notify "Clone '.doom.d' to sync with my current config"
+notify "Once that is done, run 'doom sync' and open emacs"
+notify "To add missing symbols run 'M-x nerd-icons-install-fonts'"

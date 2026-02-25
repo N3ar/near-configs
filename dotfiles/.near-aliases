@@ -1,0 +1,33 @@
+#!/bin/bash
+
+alias ll="ls -alF"
+alias la="ls -A"
+alias l="ls -CF"
+
+alias path_dump="echo $PATH | sed 's/\:/\n/g'"
+
+full_update_cmd=""
+if command -v apt > /dev/null 2>&1; then
+    alias apt-update='sudo apt update -y && sudo apt upgrade -y'
+    full_update_cmd+="apt-update "
+fi
+
+if command -v flatpak > /dev/null 2>&1; then
+    alias flatpak-update='flatpak update'
+    full_update_cmd+="&& flatpak-update "
+fi
+
+if command -v snap > /dev/null 2>&1; then
+    alias snap-update='sudo snap refresh'
+    full_update_cmd+="&& snap-update "
+fi
+
+if command -v guix > /dev/null 2>&1; then
+    alias guix-update-user='guix pull && guix upgrade'
+    alias guix-update-sys='sudo guix pull && sudo guix upgrade'
+    alias guix-update-all='guix-update-sys && guix-update-user'
+    full_update_cmd+="&& guix-update-all "
+fi
+
+alias full-update="${full_update_cmd}"
+unset full_update_cmd

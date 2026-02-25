@@ -91,7 +91,15 @@
 ;; they are implemented.
 
 ;;; Code:
+;; Set vterm font
+(defvar my/vterm-font-family "MesloLGS NF"
+  "Font family to use in vterm buffers.")
+
 (after! vterm
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (setq-local buffer-face-mode-face `(:family ,my/vterm-font-family))
+              (buffer-face-mode 1)))
   (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
 
 ;; GPTEL Install
@@ -101,7 +109,12 @@
   (setq! gptel-api-key "")
 
   ;; Set default model
-  (setq! gptel-model "gpt-5-mini")  ; Options: "gpt-5", "gpt-5-mini", "gpt-5-nano".
+  (setq! gptel-model 'gpt-5-mini) ; $0.25
+  ;;(setq! gptel-model 'gpt-5-nano) ; $0.05
+  ;;(setq! gptel-model 'gpt-5.2) ; $1.25
+  ;;(setq! gptel-model 'gpt-5.1) ; $1.25
+  ;;(setq! gptel-model 'gpt-5) ; $1.75
+
   ;;(setq! gptel-api-params
   ;;`(("reasoning_effort" . "minimal")   ;; or "low", "medium", "high"
   ;;("max_completion_tokens" . 1500)
@@ -191,5 +204,14 @@ to load the new symbol and emoji fonts."
             (progn
               (when (string-equal system-type "gnu/linux")
                 (my/setup-custom-font-fallbacks-linux)))))
+
+;; Enable ActivityWatch
+(after! activity-watch-mode
+  (setq activity-watch-api-host "http://localhost:5600")
+  (global-activity-watch-mode 1))
+
+
+;; Load scripts
+(load! "lisp/scripts")
 
 ;;; config.el ends here

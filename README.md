@@ -26,6 +26,7 @@ Remote machines require less. First and non-guix neovim should suffice.
 - net-tools-install.sh
 - flatpak-install.sh (if required)
 - logseq-install.sh
+- doom-emacs-install.sh (volta & node supporting installs)
 
 ---Maybe Remove---
 - vscode-install.sh

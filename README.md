@@ -201,6 +201,13 @@ Not something I know much about... required for a project.
 - openrefine-install.sh
 - matplotlib-install.sh (can be installed in or outside of conda env)
 
+## AI Slop Tools
+
+- ollama-install.sh
+- ollama-load-models.sh
+- open-webui-install.sh
+- open-webui-run.sh
+
 ## Additonal Tools
 
 These tools are optional. Some are needed by specific tools above and some are 

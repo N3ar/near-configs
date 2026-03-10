@@ -26,10 +26,20 @@ Remote machines require less. First and non-guix neovim should suffice.
 - net-tools-install.sh
 - flatpak-install.sh (if required)
 - logseq-install.sh
+- emacs install sequence (emacs, doom, nvm)
 
 ---Maybe Remove---
 - vscode-install.sh
 - keepass-install.sh
+
+### Emacs Sequence
+
+TODO CONFIRM
+- emacs-install.sh
+- doom-emacs-install.sh
+- copy configs
+- nvm-install.sh
+- lang-server-install.sh
 
 ## RE Tools
 

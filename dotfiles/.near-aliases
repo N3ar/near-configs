@@ -29,5 +29,9 @@ if command -v guix > /dev/null 2>&1; then
     full_update_cmd+="&& guix-update-all "
 fi
 
+if command -v npm > /dev/null 2>&1; then
+    alias npm-update='npm update -g'
+    full_update_cmd+="&& npm-update "
+
 alias full-update="${full_update_cmd}"
 unset full_update_cmd

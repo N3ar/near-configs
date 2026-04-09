@@ -4,8 +4,12 @@ alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
 
+# TODO if which gdb returns guix-profile
+alias gdb="LANG=C.UTF-8 LC_CTYPE=C.UTF-8 gdb"
+
 alias path_dump="echo $PATH | sed 's/\:/\n/g'"
 
+####### UPDATE BLOCK #######
 full_update_cmd=""
 if command -v apt > /dev/null 2>&1; then
     alias apt-update='sudo apt update -y && sudo apt upgrade -y'
@@ -13,7 +17,7 @@ if command -v apt > /dev/null 2>&1; then
 fi
 
 if command -v flatpak > /dev/null 2>&1; then
-    alias flatpak-update='flatpak update'
+    alias flatpak-update='flatpak update -y'
     full_update_cmd+="&& flatpak-update "
 fi
 
@@ -32,6 +36,8 @@ fi
 if command -v npm > /dev/null 2>&1; then
     alias npm-update='npm update -g'
     full_update_cmd+="&& npm-update "
+fi
 
 alias full-update="${full_update_cmd}"
 unset full_update_cmd
+#################################

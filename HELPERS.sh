@@ -2,26 +2,28 @@
 
 notify() {
     local level="$1"
+    local ts
+    ts="$(date +%Y-%m-%dT%H:%M:%S%z)"
 
     case "$level" in
         "i" | "info")
             shift
-            echo "[*] ${@} "
+            echo -e "${ts} [*] ${@}"
             ;;
         "w" | "warn")
             shift
-            echo "[!] WARN - ${@} "
+            echo -e "${ts} \033[1;33m[!] WARN - ${@}\033[0m"
             ;;
         "e" | "error")
             shift
-            echo "[-] ERROR - ${@} "
+            echo -e "${ts} \033[1;31m[-] ERROR - ${@}\033[0m"
             ;;
         "s" | "success")
             shift
-            echo "[+] ${@} "
+            echo -e "${ts} \033[0;32m[+] ${@}\033[0m"
             ;;
         *)
-            notify i ${@}
+            notify i "${@}"
             ;;
     esac
 }

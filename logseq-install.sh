@@ -13,18 +13,66 @@ install_logseq_sync() {
 
     mkdir -p "${SYNC_DIR}" "${SYSTEMD_DIR}"
 
-    # Copy scripts and substitute @@HOME@@ with the real path
     for script in logseq-sync-push.sh logseq-sync-pull.sh; do
         cp "${SCRIPT_DIR}/logseq-sync/${script}" "${SYNC_DIR}/${script}"
         chmod +x "${SYNC_DIR}/${script}"
     done
 
-    for unit in logseq-sync-push.service logseq-sync-pull.service \
-                logseq-sync-push.timer logseq-sync-pull.timer; do
-        sed "s|@@HOME@@|${HOME}|g" \
-            "${SCRIPT_DIR}/logseq-sync/${unit}" \
-            > "${SYSTEMD_DIR}/${unit}"
-    done
+    cat > "${SYSTEMD_DIR}/logseq-sync-push.service" <<EOF
+[Unit]
+Description=Logseq Notes — Push to remote on shutdown
+Before=shutdown.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=${SYNC_DIR}/logseq-sync-push.sh
+TimeoutStopSec=60
+
+[Install]
+WantedBy=halt.target poweroff.target reboot.target
+EOF
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-pull.service" <<EOF
+[Unit]
+Description=Logseq Notes — Pull from remote on boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=${SYNC_DIR}/logseq-sync-pull.sh
+TimeoutStopSec=120
+
+[Install]
+WantedBy=default.target
+EOF
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-push.timer" <<EOF
+[Unit]
+Description=Logseq Notes — Scheduled push at 02:00
+
+[Timer]
+OnCalendar=*-*-* 02:00:00
+Persistent=true
+Unit=logseq-sync-push.service
+
+[Install]
+WantedBy=timers.target
+EOF
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-pull.timer" <<EOF
+[Unit]
+Description=Logseq Notes — Scheduled pull at 02:15
+
+[Timer]
+OnCalendar=*-*-* 02:15:00
+Persistent=true
+Unit=logseq-sync-pull.service
+
+[Install]
+WantedBy=timers.target
+EOF
 
     systemctl --user daemon-reload
     systemctl --user enable --now logseq-sync-push.timer

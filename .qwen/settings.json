@@ -3,7 +3,9 @@
     "allow": [
       "Read(//home/near/.qwen/get-shit-done/workflows/**)",
       "Read(//home/near/.qwen/get-shit-done/references/**)",
-      "Read(//home/near/.qwen/get-shit-done/templates/**)"
+      "Read(//home/near/.qwen/get-shit-done/templates/**)",
+      "Bash(cat *)",
+      "Bash(ls *)"
     ]
   },
   "$version": 4

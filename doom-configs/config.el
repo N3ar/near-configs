@@ -82,16 +82,30 @@
 ;; Configure spacemacs dark
 (setq doom-theme 'spacemacs-dark)
 
-;; Darken spacemacs buffer Spacemacs background theme to match number column
-(defun my/spacemacs-match-line-number-bg ()
-  "Set the buffer background to match the line-number background."
-  (let ((ln-bg (face-background 'line-number nil t)))
-    (set-face-attribute 'default nil :background ln-bg)
-    (set-face-attribute 'fringe nil  :background ln-bg)
-    (when (facep 'font-lock-comment-face)
-      (set-face-attribute 'font-lock-comment-face nil :background ln-bg))))
+;; Darken spacemacs buffer to a slightly darker black
+;;((bg "#212026"))
+;;(custom-theme-set-faces! 'spacemacs-dark
+;;  '(default :background "#212026")
+;;  '(fringe :background "#212026")
+;;  )
+;;'(font-lock-comment-face :background "#212026")
+;;'(line-number :background "#212026")
 
-(add-hook 'doom-load-theme-hook #'my/spacemacs-match-line-number-bg)
+;; Darken spacemacs buffer Spacemacs background theme to match number column
+(defun my/spacemacs-better-bg ()
+  "Set the buffer background to match backgroun above."
+  (let ((bg (if (display-graphic-p) "#212026" "black")))
+    (setq frame-background-mode 'dark)
+    (set-face-background 'default bg)
+    (set-face-background 'fringe bg)
+    (when (facep 'line-number)
+      (set-face-background 'line-number bg))
+    (when (facep 'line-number-current-line)
+      (set-face-background 'line-number-current-line bg))
+    (when (facep 'font-lock-comment-face)
+      (set-face-background 'font-lock-comment-face bg))))
+
+(add-hook 'doom-load-theme-hook #'my/spacemacs-better-bg)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -228,7 +242,7 @@
       (general--concat t doom-leader-alt-key "o l") "LLM"))
 
   :config
-  (setq! gptel-api-key "<replace>")
+  (setq! gptel-api-key "replace")
 
   ;; Set default model
   (setq! gptel-backend my/gptel-ollama-backend)
@@ -263,14 +277,14 @@
   (require 'claudemacs)
 
   ;; TODO Replace localhost:11434 when I have a model that supports tool calling
-  ;;(defun near/claude-profile-ollama ()
-  ;;"Configure env for Claude Code -> local Ollama."
-  ;;(interactive)
-    ;;;; Ollama's Claude Code integration uses these 3 vars
-  ;;(setenv "ANTHROPIC_BASE_URL" "http://localhost:11434")
-  ;;(setenv "ANTHROPIC_AUTH_TOKEN" "ollama")
-    ;;;;(setenv "ANTHROPIC_API_KEY" "")
-  ;;(message "Claude Code: using LOCAL Ollama (http://localhost:11434)"))
+  (defun near/claude-profile-ollama ()
+    "Configure env for Claude Code -> local Ollama."
+    (interactive)
+    ;; Ollama's Claude Code integration uses these 3 vars
+    (setenv "ANTHROPIC_BASE_URL" "http://localhost:11434")
+    (setenv "ANTHROPIC_AUTH_TOKEN" "ollama")
+    ;;(setenv "ANTHROPIC_API_KEY" "")
+    (message "Claude Code: using LOCAL Ollama (http://localhost:11434)"))
 
   (defun near/claude-profile-anthropic ()
     "Configure env for Claude Code -> hosted Antropic without disrupting existing auth."
@@ -282,12 +296,12 @@
     (message "Claude Code: using HOSTED Anthropic (default auth)"))
 
   ;; NOTE This is deactivated until I get a model that supports toolcalling setup elsewhere
-  ;;(defun near/claudemacs-start-qwen2.5 ()
-  ;;"Start Claudemacs using local Ollama."
-  ;;(interactive)
-  ;;(near/claude-profile-ollama)
-  ;;(setenv "ANTHROPIC_MODEL" "qwen2.5-coder:7b-instruct")
-  ;;(call-interactively #'claudemacs-transient-menu))
+  (defun near/claudemacs-start-qwen3.5 ()
+    "Start Claudemacs using local Ollama."
+    (interactive)
+    (near/claude-profile-ollama)
+    (setenv "ANTHROPIC_MODEL" "qwen3.5:9b-8k")
+    (call-interactively #'claudemacs-transient-menu))
 
   (defun near/claudemacs-start-anthropic ()
     "Start Claudemacs using hosted Anthropic."
@@ -301,7 +315,7 @@
 
   (map! :leader
         (:prefix ("o l" . "LLM")
-         ;;:desc "Claudemacs (local qwen2.5)" "e" #'near/claudemacs-start-qwen2.5
+         :desc "Claudemacs (local qwen3.5)" "e" #'near/claudemacs-start-qwen3.5
          :desc "Claudemacs (hosted Anthropic)" "E" #'near/claudemacs-start-anthropic)))
 
 ;; TODO Update with python when I actually use it
@@ -323,6 +337,13 @@
 ;; Linux notification behavior + sound
 (setq claudemacs-notification-auto-dismiss-linux nil)
 (setq claudemacs-notification-sound-linux "message-new-instant")
+
+;; Agent shell configs
+(require 'acp)
+(require 'agent-shell)
+
+(setq agent-shell-qwen-authentication
+      (agent-shell-qwen-make-authentication :none t))
 
 ;; Font Fallback on linux
 (defun my/setup-custom-font-fallbacks-linux ()
@@ -364,6 +385,22 @@ to load the new symbol and emoji fonts."
 
 ;; to test if you have a font family installed:
 ;;   (find-font (font-spec :family "DejaVu Sans Mono"))
+
+;;;; Setup LLDB
+(after! dape
+  ;; Override the built-in adapter to use your absolute path
+  (setf (alist-get 'lldb-dap dape-configs)
+        '(modes (c-mode c-ts-mode c++-mode c++-ts-mode rust-mode rust-ts-mode rustic-mode)
+          ensure dape-ensure-command
+          command "/opt/llvm/19.1.2/bin/lldb-dap"
+          command-cwd dape-command-cwd
+          :type "lldb-dap"
+          :request "launch"
+          :cwd "."
+          :program "a.out"))
+
+  ;; Optional: make the minibuffer start on LLDB
+  (setq dape-command '(lldb-dap)))
 
 ;; Then, add the fonts after your setup is complete:
 (add-hook 'emacs-startup-hook

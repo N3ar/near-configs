@@ -12,7 +12,7 @@ alias path_dump="echo $PATH | sed 's/\:/\n/g'"
 ####### UPDATE BLOCK #######
 full_update_cmd=""
 if command -v apt > /dev/null 2>&1; then
-    alias apt-update='sudo apt update -y && sudo apt upgrade -y'
+    alias apt-update='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y'
     full_update_cmd+="apt-update "
 fi
 

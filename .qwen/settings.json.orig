@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/near/.qwen/get-shit-done/workflows/**)",
+      "Read(//home/near/.qwen/get-shit-done/references/**)"
+    ]
+  },
+  "$version": 4
+}

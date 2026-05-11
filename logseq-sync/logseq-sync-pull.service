@@ -1,0 +1,12 @@
+[Unit]
+Description=Logseq Notes — Pull from remote on boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=@@HOME@/.local/share/logseq-sync/logseq-sync-pull.sh
+TimeoutStopSec=120
+
+[Install]
+WantedBy=default.target

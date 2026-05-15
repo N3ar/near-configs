@@ -3,7 +3,7 @@
 set -e
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
 echo "Updating package list..."
 update

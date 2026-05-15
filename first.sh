@@ -5,7 +5,7 @@ notify i Updating apt repos to avoid broken links
 update
 upgrade
 
-source ./env.sh
+source ./ENV.sh
 if [[ ${DISTRO} == "ubuntu" ]]; then
     notify i Removing tracking software
     sudo apt purge -y apport

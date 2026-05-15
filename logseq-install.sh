@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-source ./env.sh
+source ./ENV.sh
 source ./HELPERS.sh
 
 install_logseq_sync() {
@@ -84,7 +84,7 @@ EOF
     systemctl --user list-timers '*logseq*'
 }
 
-if [[ $(is_installed flatpak) -eq 0 ]]; then
+if is_installed flatpak; then
     notify "Prioritizing flatpak installation"
     flatpak install --user flathub com.logseq.Logseq
     flatpak update

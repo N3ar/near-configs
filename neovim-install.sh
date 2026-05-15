@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./env.sh
+source ./ENV.sh
 
 if command -v guix > /dev/null 2>&1; then
     # TODO Uncomment when python-setup is fixed or fix it myself when it is needed

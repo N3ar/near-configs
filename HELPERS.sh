@@ -59,10 +59,12 @@ get_script_dir()
 }
 
 is_installed() {
-    if command -v "${1}" > /dev/null 2>&1; then
-        exit 0
+    local binary="${1}"
+    if command -v "${binary}" > /dev/null 2>&1; then
+        notify w "${binary} is already installed"
+        return 0
     fi
-    exit 1
+    return 1
 }
 
 # TODO

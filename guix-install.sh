@@ -2,7 +2,7 @@
 # TODO Remove HELPERS and ENV, manually define everything in this script so it can be pasted into place
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
 if command -v newgidmap > /dev/null 2>&1; then
     notify uidmap installed, proceed.

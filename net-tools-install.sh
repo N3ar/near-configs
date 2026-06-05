@@ -1,9 +1,9 @@
 #!/bin/bash
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
-if [[ $(is_installed guix) -gt 0 ]]; then
+if ! is_installed guix; then
     sudo apt install -y net-tools
 else
     guix install net-tools

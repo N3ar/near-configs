@@ -3,7 +3,7 @@
 set -eou pipefail
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
 # TODO 
 # find candidate config files

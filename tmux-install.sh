@@ -3,10 +3,10 @@
 set -euo pipefail
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
 notify "Installing by GUIX or APT"
-if [[ $(is_installed guix) -gt 0 ]]; then
+if ! is_installed guix; then
     notify "Installing tmux via APT"
     sudo apt install -y tmux
 else

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
-if [[ $(is_installed flatpak) -gt 0 ]]; then
+if ! is_installed flatpak; then
     wget https://github.com/zen-browser/desktop/releases/download/1.13.2b/zen.linux-x86_64.tar.xz
     sudo tar xf zen.linux-x86_64.tar.xz -C /opt
     sudo ln -s /opt/zen/zen /usr/bin/zen

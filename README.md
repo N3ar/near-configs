@@ -32,6 +32,15 @@ Remote machines require less. First and non-guix neovim should suffice.
 - vscode-install.sh
 - keepass-install.sh
 
+### Emacs Sequence
+
+TODO CONFIRM
+- emacs-install.sh
+- doom-emacs-install.sh
+- copy configs
+- nvm-install.sh
+- lang-server-install.sh
+
 ## RE Tools
 
 Note: Some tools may be installed as part of others. If you are used to using them on their own and go to install them separately, and they are already installed... it's fine.
@@ -201,6 +210,13 @@ Not something I know much about... required for a project.
 - anaconda-install.sh
 - openrefine-install.sh
 - matplotlib-install.sh (can be installed in or outside of conda env)
+
+## AI Slop Tools
+
+- ollama-install.sh
+- ollama-load-models.sh
+- open-webui-install.sh
+- open-webui-run.sh
 
 ## Additonal Tools
 

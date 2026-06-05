@@ -1,0 +1,2 @@
+FROM fredrezones55/Qwen3.5-Uncensored-HauhauCS-Aggressive:4b
+PARAMETER num_ctx 24576

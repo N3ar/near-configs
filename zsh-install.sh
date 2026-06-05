@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
 notify i "Installing zsh dependencies..."
 notify i "Installing zsh core..."

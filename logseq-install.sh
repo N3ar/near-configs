@@ -1,10 +1,90 @@
 #!/bin/bash
 set -euo pipefail
 
-source ./env.sh
+source ./ENV.sh
 source ./HELPERS.sh
 
-if [[ $(is_installed flatpak) -eq 0 ]]; then
+install_logseq_sync() {
+    notify "Installing Logseq sync services"
+
+    SYNC_DIR="${HOME}/.local/share/logseq-sync"
+    SYSTEMD_DIR="${HOME}/.config/systemd/user"
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+    mkdir -p "${SYNC_DIR}" "${SYSTEMD_DIR}"
+
+    for script in logseq-sync-push.sh logseq-sync-pull.sh; do
+        cp "${SCRIPT_DIR}/logseq-sync/${script}" "${SYNC_DIR}/${script}"
+        chmod +x "${SYNC_DIR}/${script}"
+    done
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-push.service" <<EOF
+[Unit]
+Description=Logseq Notes — Push to remote on shutdown
+Before=shutdown.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=${SYNC_DIR}/logseq-sync-push.sh
+TimeoutStopSec=60
+
+[Install]
+WantedBy=halt.target poweroff.target reboot.target
+EOF
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-pull.service" <<EOF
+[Unit]
+Description=Logseq Notes — Pull from remote on boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=${SYNC_DIR}/logseq-sync-pull.sh
+TimeoutStopSec=120
+
+[Install]
+WantedBy=default.target
+EOF
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-push.timer" <<EOF
+[Unit]
+Description=Logseq Notes — Scheduled push at 02:00
+
+[Timer]
+OnCalendar=*-*-* 02:00:00
+Persistent=true
+Unit=logseq-sync-push.service
+
+[Install]
+WantedBy=timers.target
+EOF
+
+    cat > "${SYSTEMD_DIR}/logseq-sync-pull.timer" <<EOF
+[Unit]
+Description=Logseq Notes — Scheduled pull at 02:15
+
+[Timer]
+OnCalendar=*-*-* 02:15:00
+Persistent=true
+Unit=logseq-sync-pull.service
+
+[Install]
+WantedBy=timers.target
+EOF
+
+    systemctl --user daemon-reload
+    systemctl --user enable --now logseq-sync-push.timer
+    systemctl --user enable --now logseq-sync-pull.timer
+    systemctl --user enable logseq-sync-push.service
+    systemctl --user enable logseq-sync-pull.service
+
+    notify "Logseq sync installed:"
+    systemctl --user list-timers '*logseq*'
+}
+
+if is_installed flatpak; then
     notify "Prioritizing flatpak installation"
     flatpak install --user flathub com.logseq.Logseq
     flatpak update
@@ -16,6 +96,8 @@ if [[ $(is_installed flatpak) -eq 0 ]]; then
 
     notify "New accesses:"
     flatpak info --show-permissions com.logseq.Logseq
+
+    install_logseq_sync
 
     notify s "Logseq installed via Flatpak"
     exit 0
@@ -45,3 +127,7 @@ IMG=`find ${TGT} -type f -name "Logseq-*"`
 ln -sf ${IMG} $(pwd)/logseq
 
 popd #TGT
+
+install_logseq_sync
+
+notify s "Logseq installed via AppImage"

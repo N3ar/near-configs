@@ -4,7 +4,7 @@ set -euo pipefail
 
 source ./HELPERS.sh
 
-if [[ $(is_installed guix) -gt 0 ]]; then
+if ! is_installed guix; then
     notify w "This system doesn't have guix."
     notify "The lack of guix implies that it is not a primary system"
     notify "Please install neovim and tmux instead"

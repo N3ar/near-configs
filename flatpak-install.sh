@@ -3,9 +3,9 @@
 set -eou pipefail
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
-if [[ $(is_installed guix) -gt 0 ]]; then
+if ! is_installed guix; then
     notify Installing flatpak through APT
     update
     upgrade

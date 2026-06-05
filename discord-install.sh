@@ -2,7 +2,7 @@
 set -e
 
 source ./HELPERS.sh
-source ./env.sh
+source ./ENV.sh
 
 if command -v flatpak > /dev/null; then
     notify "Flatpak is present -- prioritizing flatpak"

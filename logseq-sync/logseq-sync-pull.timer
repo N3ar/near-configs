@@ -1,0 +1,10 @@
+[Unit]
+Description=Logseq Notes — Scheduled pull at 02:15
+
+[Timer]
+OnCalendar=*-*-* 02:15:00
+Persistent=true
+Unit=logseq-sync-pull.service
+
+[Install]
+WantedBy=timers.target

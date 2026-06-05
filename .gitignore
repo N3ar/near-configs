@@ -2,3 +2,5 @@ external-installers
 gef-gdb
 get-gdb/*
 tmux-configs/tmux-spacemacs-dark
+
+.planning/

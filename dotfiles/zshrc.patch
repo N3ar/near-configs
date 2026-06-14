@@ -1,0 +1,21 @@
+# NOTE APPEND to zshrc 
+
+if [[ "$TERM" == "linux" ]]; then
+  typeset -g POWERLEVEL9K_MODE=compatible
+fi 
+
+NEAR_DOTDIR="${HOME}/Code/near-configs/dotfiles"
+[[ -f "$NEAR_DOTDIR/.nearrc" ]] && source "$NEAR_DOTDIR/.nearrc"
+[[ -f "$NEAR_DOTDIR/.near-aliases" ]] && source "$NEAR_DOTDIR/.near-aliases"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Add Doom Emacs to PATH
+export PATH="/home/near/.config/emacs/bin:$PATH"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+. "$HOME/.local/share/../bin/env"

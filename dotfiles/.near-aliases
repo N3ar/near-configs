@@ -38,6 +38,23 @@ if command -v npm > /dev/null 2>&1; then
     full_update_cmd+="&& npm-update "
 fi
 
+# TODO If guix includes version update of emacs, run doom sync -u
+#     Required: Need to tell the difference between re-pulling the same version & a new one
+if command -v doom > /dev/null 2>&1; then
+    alias doom-update='doom sync -u'
+    full_update_cmd+="&& doom-update "
+fi
+
+# TODO Create a utility for updating git installed tools from near-configs
+# Requirements:
+# Must be able to find them and update only to next stable version, no randomly following main
+# Must not update dependencies out of compiance with main tools
+
 alias full-update="${full_update_cmd}"
 unset full_update_cmd
 #################################
+
+######## TTY EMACS ##############
+if command -v emacs > /dev/null 2>&1; then
+  alias emacs-client-tty="TERM=xterm-256color emacsclient -t"
+fi 

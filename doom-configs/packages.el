@@ -9,13 +9,14 @@
 ;;
 ;; Use 'C-h f package\!' to look up documentation for the `package!' macro.
 
-
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)
 (package! spacemacs-theme)
 (package! forge)
 (package! pandoc-mode)
+;; NOTE Activity watch doesn't really work
 (package! activity-watch-mode)
+;; agent-shell support
 (package! shell-maker)
 (package! acp)
 (package! agent-shell)
@@ -28,6 +29,15 @@
 (package! codium :recipe (:host github :repo "Exafunction/codeium.el"))
 (package! gptel :recipe (:nonrecursive t))
 (package! claudemacs :recipe (:host github :repo "cpoile/claudemacs"))
+(package! eglot-ltex-plus
+  :recipe (:host github :repo "emacs-languagetool/eglot-ltex-plus"))
+
+;; If the package you are trying to install does not contain a PACKAGENAME.el
+;; file, or is located in a subdirectory of the repo, you'll need to specify
+;; `:files' in the `:recipe':
+;; (package! this-package
+;;   :recipe (:host github :repo "username/repo"
+;;            :files ("some-file.el" "src/lisp/*.el")))
 (package! eat
   :recipe (:host codeberg
            :repo "akib/emacs-eat"
@@ -36,15 +46,19 @@
                    ("terminfo/65" "terminfo/65/*")
                    ("integration" "integration/*")
                    (:exclude ".dir-locals.el" "*-tests.el"))))
-(package! eglot-grammarly
-  :recipe (:host github :repo "emacs-grammarly/eglot-grammarly"))
 
-;; If the package you are trying to install does not contain a PACKAGENAME.el
-;; file, or is located in a subdirectory of the repo, you'll need to specify
-;; `:files' in the `:recipe':
-;; (package! this-package
-;;   :recipe (:host github :repo "username/repo"
-;;            :files ("some-file.el" "src/lisp/*.el")))
+;; org-logseq
+(package! org-logseq :recipe (:host github :repo "llcc/org-logseq" :files ("*")))
+
+;; embr: Headless Chromium based browser
+(package! embr :recipe (:host github
+                        :repo "emacs-os/embr.el"
+                        :files ("*.el" "*.py" "*.sh" "native/*.c" "native/Makefile")))
+
+;; guix
+(package! emacs-guix :recipe (:host nil
+                              :repo "https://codeberg.org/guix/emacs-guix.git"
+                              :files ("elisp/*.el")))
 
 ;; If you'd like to disable a package included with Doom, you can do so here
 ;; with the `:disable' property:
@@ -71,6 +85,3 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
-(package! emacs-guix :recipe (:host nil
-                              :repo "https://codeberg.org/guix/emacs-guix.git"
-                              :files ("elisp/*.el")))

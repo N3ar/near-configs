@@ -1,6 +1,8 @@
 #!/bin/bash
-# TODO Remove HELPERS and ENV, manually define everything in this script so it can be pasted into place
 
+set -euo pipefail
+
+# TODO Remove HELPERS and ENV, manually define everything in this script so it can be pasted into place
 source ./HELPERS.sh
 source ./ENV.sh
 
@@ -33,6 +35,7 @@ else
 fi
 
 # Fetch most recent guix install script from mirror
+# TODO Update endpoint to proper endpoint
 pushd /tmp
 wget https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
 chmod +x guix-install.sh
@@ -79,9 +82,12 @@ popd
 #fi
 
 notify "Updating system guix"
-sudo guix pull
+sudo guix pull && guix upgrade
 
 notify "Updating user guix"
-guix pull
+guix pull && guix upgrade
+
+guix install glibc-locales
 
 nofity "GUIX UPDATES COMPLETE"
+exit 0

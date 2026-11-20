@@ -41,6 +41,9 @@
   (setenv var nil))
 
 ;; Handle TTY Usage
+;; TODO Make TTY use ascii configs
+;; TODO Make TTY use robby russel instead of powerline10k
+;; TODO Make emacs use currectly spaced symbol set
 (defun near/linux-vt-console-p ()
   "True when running on the Linux virtual console (e.g. tty1, TERM=linux)."
   (and (not (display-graphic-p))
@@ -82,30 +85,27 @@
 ;; Configure spacemacs dark
 (setq doom-theme 'spacemacs-dark)
 
-;; Darken spacemacs buffer to a slightly darker black
-;;((bg "#212026"))
-;;(custom-theme-set-faces! 'spacemacs-dark
-;;  '(default :background "#212026")
-;;  '(fringe :background "#212026")
-;;  )
-;;'(font-lock-comment-face :background "#212026")
-;;'(line-number :background "#212026")
-
 ;; Darken spacemacs buffer Spacemacs background theme to match number column
 (defun my/spacemacs-better-bg ()
+  ;; TODO Fix this so it works in regular case as well as in terminal/tty
+  ;; TODO Probe for 256 color availability & adjust
+  ;; NOTE If I want to use #171421 I will get deep blue from gnome term
   "Set the buffer background to match backgroun above."
   (let ((bg (if (display-graphic-p) "#212026" "black")))
     (setq frame-background-mode 'dark)
     (set-face-background 'default bg)
     (set-face-background 'fringe bg)
-    (when (facep 'line-number)
-      (set-face-background 'line-number bg))
-    (when (facep 'line-number-current-line)
-      (set-face-background 'line-number-current-line bg))
+    ;;(when (facep 'line-number)
+    ;;(set-face-background 'line-number bg))
+    ;;(when (facep 'line-number-current-line)
+    ;;(set-face-background 'line-number-current-line bg))
     (when (facep 'font-lock-comment-face)
       (set-face-background 'font-lock-comment-face bg))))
 
 (add-hook 'doom-load-theme-hook #'my/spacemacs-better-bg)
+
+;; rm fringe
+;;(fringe-mode 0)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -150,15 +150,101 @@
 
 ;;; Code:
 ;; Set vterm font
+(setq doom-unicode-font doom-font)
+
+;; TODO Might be able to get rid of this since it doesn't help with symbols
+;; TODO What would help get the symbols and spacing right on p10k?
 (defvar my/vterm-font-family "MesloLGS NF"
   "Font family to use in vterm buffers.")
 
 (after! vterm
   (add-hook 'vterm-mode-hook
             (lambda ()
-              (setq-local buffer-face-mode-face `(:family ,my/vterm-font-family))
+              (setq-local buffer-face-mode-face `(:family my/vterm-font-family))
               (buffer-face-mode 1)))
   (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
+
+;; Configure org-logseq
+(use-package! org-logseq
+  :custom
+  (org-logseq-dir "~/notes"))
+
+;; Configure embr
+(use-package! embr
+  :init
+  (setq embr-dispatch-key "C-c")
+  :config
+  ;; Set to 'canvas if you have Emacs canvas patch, otherwise it defaults to image streaming
+  ;; (setq embr-render-backend 'canvas)
+  (setq embr-hover-rate 25)          ; Lower hover rate to reduce CDP load
+  (setq embr-jpeg-quality 75)        ; Drop qual 80>75 for faster frame encoding
+  (setq browse-url-browser-function #'embr-browse-url))
+
+;; Configure eaf - Emacs Application Framework - for stable browser alt to embr
+;;(use-package! :eaf
+;;:config
+;;(require 'eaf-browser)
+;;(setq browse-url-browser-function 'eaf-open-browser)
+;;(setq eaf-browser-enable-adblocker "true")
+;;(setq eaf-browser-continue-where-left-off t))
+
+;; Configure mu4e / email
+(after! mu4e
+  ;; Hard-wrap outgoing emails at column 80.
+  (setq message-fill-column 80)
+
+  ;; Shared mail configuration
+  (setq mu4e-get-mail-command "mbsync --all"
+        mu4e-update-interval 300
+        mu4e-context-policy 'pick-first
+        mu4e-compose-context-policy 'ask-if-none
+        mu4e-sent-messages-behavior 'delete
+        mu4e-compose-format-flowed nil
+        mu4e-index-cleanup nil
+        mu4e-index-lazy-check t
+        sendmail-program (executable-find "msmtp")
+        send-mail-function #'sendmail-send-it
+        message-send-mail-function #'message-send-mail-with-sendmail
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        )
+
+  ;; Retrieve SMTP passwords from pass
+  (require 'auth-source-pass)
+  (auth-source-pass-enable)
+
+  ;; Tell Doom all three are Gmail accounts
+  (setq +mu4e-gmail-accounts
+        '(("jwarne90@gmail.com" . "/jwarne90")
+          ("jwarne@phidyn.com" . "/phidyn")
+          ("jwarne@malachite.llc" . "/malachite")))
+
+  ;; Account 1: jwarne90@gmail.com
+  (set-email-account! "jwarne90"
+                      '((user-mail-address . "jwarne90@gmail.com")
+                        (mu4e-sent-folder . "/jwarne90/[Gmail]/Sent Mail")
+                        (mu4e-drafts-folder . "/jwarne90/[Gmail]/Drafts")
+                        (mu4e-trash-folder . "/jwarne90/[Gmail]/Trash")))
+
+  ;; Account 2: Phi Dynammics
+  (set-email-account! "phidyn"
+                      '((user-mail-address . "jwarne@phidyn.com")
+                        (mu4e-sent-folder . "/phidyn/[Gmail]/Sent Mail")
+                        (mu4e-drafts-folder . "/phidyn/[Gmail]/Drafts")
+                        (mu4e-trash-folder . "/phidyn/[Gmail]/Trash"))
+                      t)
+
+  ;; Account 3: Malachite LLC
+  (set-email-account! "malachite"
+                      '((user-mail-address . "jwarne@malachite.llc")
+                        (mu4e-sent-folder . "/malachite/[Gmail]/Sent Mail")
+                        (mu4e-drafts-folder . "/malachite/[Gmail]/Drafts")
+                        (mu4e-trash-folder . "/malachite/[Gmail]/Trash")))
+
+  (add-hook 'mu4e-compose-mode-hook
+            (lambda ()
+              (setq-local fill-column 80)
+              (auto-fill-mode 1))))
 
 ;; GPTEL Install
 ;; TODO Put in Keyring
@@ -339,11 +425,67 @@
 (setq claudemacs-notification-sound-linux "message-new-instant")
 
 ;; Agent shell configs
-(require 'acp)
-(require 'agent-shell)
+(use-package! agent-shell
+  :commands (agent-shell
+             agent-shell-qwen-start
+             agent-shell-hermes-start-agent
+             agent-shell-openai-start-codex)
+  :config
+  (require 'acp)
+  (require 'agent-shell)
+  (require 'agent-shell-qwen)
+  (require 'agent-shell-hermes)
+  (require 'agent-shell-openai)
 
-(setq agent-shell-qwen-authentication
-      (agent-shell-qwen-make-authentication :none t))
+  ;; No default, M-x agent-shell prompts selection
+  (setq agent-shell-preferred-agent-config nil)
+
+  ;; Show only agents I actually want to choose from
+  (setq agent-shell-agent-configs
+        (list
+         (agent-shell-qwen-make-agent-config)
+         (agent-shell-hermes-make-agent-config)
+         (agent-shell-openai-make-codex-config)))
+
+  ;; Qwen Code auth is handled by ~/.qwen/settings.json / ~/.qwen/.env.
+  ;; Do not let agent-shell try Qwen OAuth.
+  (setq agent-shell-qwen-authentication
+        (agent-shell-qwen-make-authentication :none t))
+
+  ;; Make the environment explicit for the spawned qwen ACP process.
+  ;; Change ~/.qwen/.env if your env file lives elsewhere.
+  (setq agent-shell-qwen-environment
+        (agent-shell-make-environment-variables
+         :inherit-env t
+         :load-env "~/.qwen/.env"
+         "OLLAMA_KEY" (or (getenv "OLLAMA_KEY") "ollama")))
+
+  ;; Hermes ACP
+  (setq agent-shell-hermes-acp-command '("hermes" "acp"))
+
+  ;; Hermes edit behavior
+  ;; nil = ask every time
+  ;; accept_edits = auto-approve workspace + /tmp
+  ;; dont_ask = auto-approve all
+  (setq agent-shell-hermes-default-session-mode-id "accept-edits")
+
+  ;; Explicit env for hermes ACP
+  (setq agent-shell-hermes-environment
+        (agent-shell-make-environment-variables
+         :inherit-env t
+         :load-env "~/.hermes/.env"))
+
+  ;; Codex ACP
+  ;; Using ChatGPT login (subscription support) and using local envrionment
+  ;; Set ACP mode to "agent" between: read-only | agent | agent-full-access
+  (setq agent-shell-openai-codex-acp-command '("codex-acp"))
+  (setq agent-shell-openai-authentication
+        (agent-shell-openai-make-authentication :login t))
+  (setq agent-shell-openai-codex-environment
+        (agent-shell-make-environment-variables
+         :inherit-env t))
+  (setq agent-shell-openai-default-session-mode-id "agent"))
+
 
 ;; Font Fallback on linux
 (defun my/setup-custom-font-fallbacks-linux ()
@@ -400,7 +542,8 @@ to load the new symbol and emoji fonts."
           :program "a.out"))
 
   ;; Optional: make the minibuffer start on LLDB
-  (setq dape-command '(lldb-dap)))
+  ;;(setq dape-command '(lldb-dap))
+  )
 
 ;; Then, add the fonts after your setup is complete:
 (add-hook 'emacs-startup-hook
@@ -410,26 +553,20 @@ to load the new symbol and emoji fonts."
                 (my/setup-custom-font-fallbacks-linux)))))
 
 ;; Enable ActivityWatch
+;; TODO Activity watch doesn't appear to work
 (after! activity-watch-mode
   (setq activity-watch-api-host "http://localhost:5600")
   (global-activity-watch-mode 1))
 
-;;;; Enable Grammarly
-;;(use-package! eglot-grammarly
-;;:defer t
-;;:hook ((markdown-mode text-mode org-mode latex-mode-hook) . eglot-ensure))
-(use-package! eglot
-  :defer t
-  :hook ((text-mode
-          markdown-mode
-          org-mode
-          latex-mode) . eglot-ensure)
-  :config
-  (add-to-list 'eglot-server-programs
-               '(((text-mode markdown-mode org-mode latex-mode))
-                 . ("grammarly-languageserver" "--stdio"
-                    :initializationOptions
-                    (:clientId "client_BaDkMgx4X19X9UxxYRCXZo")))))
+;; Enable Grammar/ Spell check via eglot
+(after! eglot
+  (setq-default eglot-workspace-configuration
+                '(:ltex-ls-plus (:language "en-US")))
+  (require 'eglot-ltex-plus)
+  (dolist (mode-entry eglot-ltex-plus-active-modes)
+    (let* ((mode (if (consp mode-entry) mode-entry))
+           (hook (intern (format "%s-hook" mode))))
+      (add-hook hook #'eglot-ensure))))
 
 ;; Load scripts
 (load! "lisp/scripts")

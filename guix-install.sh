@@ -84,4 +84,6 @@ sudo guix pull
 notify "Updating user guix"
 guix pull
 
+guix install glibc-locales
+
 nofity "GUIX UPDATES COMPLETE"

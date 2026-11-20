@@ -4,3 +4,6 @@ get-gdb/*
 tmux-configs/tmux-spacemacs-dark
 
 .planning/
+.gsd/
+.mcp.json
+.bg-shell/
